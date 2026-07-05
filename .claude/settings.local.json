@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/brandnameluxuryclothing/**)",
+      "Bash(find / -name \"*fable-prompt*\" -not -path \"/proc/*\" -not -path \"/sys/*\")",
+      "Bash(npm --version)",
+      "Bash(npm ping *)",
+      "Bash(npm install *)",
+      "Bash(npx tsx *)",
+      "Bash(npm run *)",
+      "Bash(npm ls *)",
+      "Bash(curl -s http://localhost:3111/)",
+      "Bash(curl -s http://localhost:3111/admin)",
+      "Bash(curl -s \"https://rigyjvqarqxrutucvgfb.supabase.co/rest/v1/resource_groups?select=id&limit=1\" -H \"apikey: sb_publishable_gjMK6ntslZ4-ccbEqCn90A__swZYumC\")",
+      "Bash(curl -s -o /dev/null -w \"og-image: %{http_code} %{content_type} %{size_download} bytes\\\\n\" http://localhost:3111/opengraph-image)",
+      "Bash(curl -s -o /dev/null -w \"sw.js: %{http_code}\\\\n\" http://localhost:3111/sw.js)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"next start\")",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git -c user.email=zandenkelly@gmail.com -c 'user.name=Zanden Kelly' commit -q -m 'Memphis Family Resource Guide v3 — full-stack migration *)"
+    ]
+  }
+}
