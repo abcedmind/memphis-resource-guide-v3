@@ -5,7 +5,7 @@
  * Family plans and admin actions require a connection; resource browsing
  * keeps working on a spotty signal once the guide has loaded once.
  */
-const CACHE = "mfrg-v3-1";
+const CACHE = "mfrg-v3-2";
 const PRECACHE = ["/", "/family", "/suggest"];
 
 self.addEventListener("install", (event) => {
@@ -65,9 +65,11 @@ self.addEventListener("fetch", (event) => {
         return res;
       })
       .catch(() =>
-        caches
-          .match(request)
-          .then((hit) => hit || caches.match("/"))
+        // Only real page loads may fall back to the cached shell; answering
+        // RSC/data fetches with homepage HTML corrupts client navigation.
+        request.mode === "navigate"
+          ? caches.match(request).then((hit) => hit || caches.match("/"))
+          : caches.match(request)
       )
   );
 });

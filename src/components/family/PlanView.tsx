@@ -1,21 +1,29 @@
 "use client";
 
-import { CAT, SERVE_BADGE } from "@/lib/constants";
+import { CAT } from "@/lib/constants";
 import { buildCoworkPayload, coworkReadyPrograms } from "@/lib/eligibility";
-import type { FamilyPlan, FlatResource } from "@/lib/types";
+import { useLang } from "@/lib/i18n";
+import type { FamilyPlan, FlatResource, ServeType } from "@/lib/types";
+
+const SERVE_COLOR: Record<ServeType, string> = {
+  online: "#3aab7c",
+  inperson: "#e07c45",
+  navigator: "#9b59b6",
+};
 
 function Prog({ r }: { r: FlatResource }) {
+  const { t } = useLang();
   const col = CAT[r.cat]?.color || "#777";
   return (
     <div
-      className="bg-white border border-line-sand rounded-md px-3 py-2.5 mb-1.5"
+      className="bg-white border border-line-sand rounded-md px-3 py-2.5 mb-1.5 print:break-inside-avoid"
       style={{ borderLeft: `4px solid ${col}` }}
     >
       <div className="flex justify-between items-start gap-2 flex-wrap">
         <div className="text-[13px] font-semibold text-ink flex-1">{r.name}</div>
         <div className="flex gap-1 shrink-0">
           {r.basicInfoOnly && (
-            <span className="text-[7px] text-cat-technology border border-[#2980b955] px-1 py-0.5 rounded-[3px] whitespace-nowrap tracking-[0.04em]">
+            <span className="text-[7px] text-cat-technology border border-[#2980b955] px-1 py-0.5 rounded-[3px] whitespace-nowrap tracking-[0.04em] print:hidden">
               ⚡ COWORK
             </span>
           )}
@@ -23,17 +31,17 @@ function Prog({ r }: { r: FlatResource }) {
             <span
               className="text-[7px] tracking-[0.04em] border px-1 py-0.5 rounded-[3px] whitespace-nowrap"
               style={{
-                color: SERVE_BADGE[r.serve].color,
-                borderColor: `${SERVE_BADGE[r.serve].color}55`,
+                color: SERVE_COLOR[r.serve],
+                borderColor: `${SERVE_COLOR[r.serve]}55`,
               }}
             >
-              {SERVE_BADGE[r.serve].label.toUpperCase()}
+              {t.serve[r.serve].toUpperCase()}
             </span>
           )}
         </div>
       </div>
       <div className="text-[11px] text-[#666] mt-1 mb-[5px] leading-normal">
-        <b>How: </b>
+        <b>{t.browse.howToAccess}</b>
         {r.how}
       </div>
       {r.url && (
@@ -41,10 +49,13 @@ function Prog({ r }: { r: FlatResource }) {
           href={r.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[11px] no-underline"
+          className="text-[11px] no-underline plan-url"
           style={{ color: col }}
         >
-          ↗ Register / learn more
+          <span className="print:hidden">↗ {t.browse.registerLearnMore}</span>
+          <span className="hidden print:inline">
+            ↗ {r.url.replace("https://www.", "").replace("https://", "")}
+          </span>
         </a>
       )}
     </div>
@@ -64,6 +75,7 @@ export default function PlanView({
   saveState: "idle" | "saving" | "saved" | "error";
   onBack: () => void;
 }) {
+  const { t } = useLang();
   const coworkReady = coworkReadyPrograms(plan);
 
   const exportCowork = () => {
@@ -80,54 +92,76 @@ export default function PlanView({
 
   return (
     <div className="px-4 pt-[18px] pb-10">
-      <button onClick={onBack} className="bg-transparent text-[#888] text-xs p-0 mb-3">
-        ← edit answers
+      {/* Print-only letterhead: turns the browser's Save-as-PDF into a
+          clean, shareable document a navigator can hand to a family. */}
+      <div className="hidden print:block border-b-2 border-ink pb-3 mb-4">
+        <div className="text-[10px] tracking-[0.2em] text-[#666]">
+          {t.plan.printedFrom.toUpperCase()}
+        </div>
+        <div className="text-[10px] text-[#888] mt-1">
+          {t.plan.printedOn}:{" "}
+          {new Date().toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </div>
+      </div>
+
+      <button
+        onClick={onBack}
+        className="bg-transparent text-[#888] text-xs p-0 mb-3 print:hidden"
+      >
+        {t.plan.editAnswers}
       </button>
       <h2 className="text-[19px] font-extrabold text-ink m-0 mb-1">
-        {parent ? `${parent}'s` : "Your"} Family Plan
+        {parent
+          ? t.plan.familyPlanOf.replace("{name}", parent)
+          : t.plan.yourFamilyPlan}
       </h2>
-      <p className="text-xs text-[#888] m-0 mb-3.5 leading-normal">
-        Every free program your family qualifies for. Start with ⚡ Cowork
-        programs if you have Claude Desktop.
+      <p className="text-xs text-[#888] m-0 mb-3.5 leading-normal print:hidden">
+        {t.plan.subtitle}
       </p>
       {optIn && saveState === "saved" && (
-        <p className="text-[11px] text-serve-online m-0 mb-3.5">
-          ✓ Info saved — a navigator can follow up.
+        <p className="text-[11px] text-serve-online m-0 mb-3.5 print:hidden">
+          {t.plan.saved}
         </p>
       )}
       {optIn && saveState === "saving" && (
-        <p className="text-[11px] text-[#888] m-0 mb-3.5">Saving your info…</p>
+        <p className="text-[11px] text-[#888] m-0 mb-3.5 print:hidden">
+          {t.plan.saving}
+        </p>
       )}
       {optIn && saveState === "error" && (
-        <p className="text-[11px] text-cat-identity m-0 mb-3.5" role="alert">
-          Couldn&apos;t save your info (connection issue). Your plan below
-          still works — try again later or call 2-1-1.
+        <p
+          className="text-[11px] text-cat-identity m-0 mb-3.5 print:hidden"
+          role="alert"
+        >
+          {t.plan.saveError}
         </p>
       )}
 
-      {/* ── Cowork block ── */}
+      {/* ── Cowork block (interactive only — pointless on paper) ── */}
       {coworkReady.length > 0 && (
-        <div className="bg-[#eef4fb] border-2 border-cat-education rounded-[10px] p-3.5 mb-[22px]">
+        <div className="bg-[#eef4fb] border-2 border-cat-education rounded-[10px] p-3.5 mb-[22px] print:hidden">
           <div className="text-xs font-extrabold tracking-[0.08em] text-[#2c5aa0] mb-2">
-            ⚡ {coworkReady.length} PROGRAM{coworkReady.length !== 1 ? "S" : ""} — COWORK READY
+            ⚡ {coworkReady.length} PROGRAM
+            {coworkReady.length !== 1 ? "S" : ""} — {t.plan.coworkReady}
           </div>
           <p className="text-[11px] text-[#3a5a7a] m-0 mb-2.5 leading-relaxed">
-            These only need name, contact info, and age — no SSNs or income
-            docs. Claude Cowork + Chrome can pre-fill them. You review and
-            approve each form before it submits. Nothing goes through without
-            your OK.
+            {t.plan.coworkBody}
           </p>
 
           <button
             onClick={exportCowork}
             className="w-full bg-[#2c5aa0] text-white rounded-[7px] py-[11px] text-[13px] font-bold mb-3"
           >
-            ⬇ Export plan for Cowork (.json)
+            {t.plan.exportButton}
           </button>
 
           <details>
             <summary className="text-[10px] text-[#2c5aa0] cursor-pointer font-bold tracking-[0.06em] mb-1.5">
-              COWORK SETUP INSTRUCTIONS (tap to expand)
+              {t.plan.setupSummary}
             </summary>
             <div className="text-[11px] text-[#3a5a7a] leading-[1.8] mt-2">
               <b>One-time setup:</b>
@@ -177,14 +211,14 @@ export default function PlanView({
       {plan.childPlans.map((cp, i) => (
         <div key={i} className="mb-5">
           <div className="text-xs font-extrabold tracking-[0.06em] text-cat-education border-b-2 border-line-sand pb-[5px] mb-2">
-            {cp.child.name ? cp.child.name.toUpperCase() : `CHILD ${i + 1}`} ·
-            AGE {cp.child.age}
+            {cp.child.name ? cp.child.name.toUpperCase() : `${t.plan.child} ${i + 1}`} ·{" "}
+            {t.plan.age} {cp.child.age}
           </div>
           {cp.programs.length ? (
             cp.programs.map((r) => <Prog key={r.id} r={r} />)
           ) : (
             <div className="text-[11px] text-[#aaa] pb-1">
-              See family-wide programs below.
+              {t.plan.seeFamilyWide}
             </div>
           )}
         </div>
@@ -193,7 +227,7 @@ export default function PlanView({
       {/* ── Family-wide ── */}
       <div className="mt-1.5">
         <div className="text-xs font-extrabold tracking-[0.06em] text-cat-enrichment border-b-2 border-line-sand pb-[5px] mb-2">
-          FOR THE WHOLE FAMILY
+          {t.plan.familyWideTitle}
         </div>
         {plan.family.map((r) => (
           <Prog key={r.id} r={r} />
@@ -204,7 +238,7 @@ export default function PlanView({
         onClick={() => window.print()}
         className="w-full mt-4 bg-cat-education text-white rounded-lg py-[11px] text-[13px] font-semibold print:hidden"
       >
-        Print / Save this plan
+        {t.plan.printButton}
       </button>
     </div>
   );

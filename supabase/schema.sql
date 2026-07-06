@@ -26,6 +26,7 @@ create table resources (
   serve text check (serve in ('online','inperson','navigator')),
   basic_info_only boolean default false,
   is_approved boolean default true,
+  sort_order int default 0, -- preserves v2's curated order within each group
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );

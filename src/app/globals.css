@@ -19,4 +19,26 @@ body {
   body {
     background: #fff;
   }
+  /* The family plan prints as a clean document: full width, no card
+     shadows, readable ink-on-paper contrast, page breaks between kids. */
+  @page {
+    margin: 0.6in;
+  }
+  .bg-cream,
+  .max-w-\[680px\] {
+    max-width: 100% !important;
+    background: #fff !important;
+  }
+  a {
+    color: #1a1a2e !important;
+  }
+  .print\:break-inside-avoid {
+    break-inside: avoid;
+  }
+  .hidden.print\:block {
+    display: block !important;
+  }
+  .hidden.print\:inline {
+    display: inline !important;
+  }
 }

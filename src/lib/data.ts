@@ -59,7 +59,11 @@ export async function fetchGroups(): Promise<{
     );
     const [groupsRes, resourcesRes] = await Promise.all([
       supabase.from("resource_groups").select("*"),
-      supabase.from("resources").select("*").eq("is_approved", true),
+      supabase
+        .from("resources")
+        .select("*")
+        .eq("is_approved", true)
+        .order("sort_order", { ascending: true }),
     ]);
     if (groupsRes.error || resourcesRes.error) throw (groupsRes.error || resourcesRes.error);
     const groups = (groupsRes.data ?? []) as DbGroup[];

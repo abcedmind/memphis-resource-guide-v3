@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { CAT } from "@/lib/constants";
+import { useLang } from "@/lib/i18n";
 import type { CategoryId, ServeType } from "@/lib/types";
 
 const inp =
@@ -35,16 +36,17 @@ const EMPTY: FormState = {
 };
 
 export default function SubmitForm() {
+  const { t } = useLang();
   const [f, setF] = useState<FormState>(EMPTY);
   const [done, setDone] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
+  const [err, setErr] = useState<"required" | "network" | null>(null);
   const [busy, setBusy] = useState(false);
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setF({ ...f, [k]: v });
 
   const submit = async () => {
     if (!f.name.trim() || !f.desc.trim()) {
-      setErr("Program name and description are required.");
+      setErr("required");
       return;
     }
     setBusy(true);
@@ -66,9 +68,7 @@ export default function SubmitForm() {
       if (error) throw error;
       setDone(true);
     } catch {
-      setErr(
-        "Couldn't submit right now — please check your connection and try again."
-      );
+      setErr("network");
     } finally {
       setBusy(false);
     }
@@ -78,10 +78,9 @@ export default function SubmitForm() {
     return (
       <div className="px-6 py-10 text-center">
         <div className="text-[40px] mb-2.5" aria-hidden="true">✓</div>
-        <h2 className="text-lg text-ink m-0 mb-2">Thank you</h2>
+        <h2 className="text-lg text-ink m-0 mb-2">{t.suggest.thanksTitle}</h2>
         <p className="text-[13px] text-[#888] leading-relaxed max-w-[360px] mx-auto mb-[18px]">
-          Your suggestion was submitted for review. Once approved, it&apos;ll
-          appear in the guide for every family.
+          {t.suggest.thanksBody}
         </p>
         <button
           onClick={() => {
@@ -90,7 +89,7 @@ export default function SubmitForm() {
           }}
           className="bg-ink text-white rounded-lg px-5 py-2.5 text-[13px]"
         >
-          Submit another
+          {t.suggest.another}
         </button>
       </div>
     );
@@ -98,50 +97,49 @@ export default function SubmitForm() {
   return (
     <div className="px-4 pt-[18px] pb-10">
       <div className="bg-[#f0f9f4] border border-[#c8e6d4] rounded-lg px-3.5 py-3 mb-4 text-xs text-[#2a6b48] leading-relaxed">
-        Know a free program we&apos;re missing? Suggest it here. Submissions
-        are reviewed before appearing in the guide.
+        {t.suggest.intro}
       </div>
-      <label className={lbl} htmlFor="sf-name">PROGRAM NAME *</label>
-      <input id="sf-name" className={inp} value={f.name} onChange={(e) => set("name", e.target.value)} placeholder="e.g. Free Saturday Art Classes at …" />
-      <label className={lbl} htmlFor="sf-desc">WHAT IT IS *</label>
-      <textarea id="sf-desc" className={`${inp} min-h-[70px]`} value={f.desc} onChange={(e) => set("desc", e.target.value)} placeholder="What does it offer? Who is it for? Is it free?" />
-      <label className={lbl} htmlFor="sf-how">HOW TO ACCESS IT</label>
-      <input id="sf-how" className={inp} value={f.how} onChange={(e) => set("how", e.target.value)} placeholder="Phone, address, or how to sign up" />
-      <label className={lbl} htmlFor="sf-url">WEBSITE (if any)</label>
+      <label className={lbl} htmlFor="sf-name">{t.suggest.nameLabel}</label>
+      <input id="sf-name" className={inp} value={f.name} onChange={(e) => set("name", e.target.value)} placeholder={t.suggest.namePlaceholder} />
+      <label className={lbl} htmlFor="sf-desc">{t.suggest.descLabel}</label>
+      <textarea id="sf-desc" className={`${inp} min-h-[70px]`} value={f.desc} onChange={(e) => set("desc", e.target.value)} placeholder={t.suggest.descPlaceholder} />
+      <label className={lbl} htmlFor="sf-how">{t.suggest.howLabel}</label>
+      <input id="sf-how" className={inp} value={f.how} onChange={(e) => set("how", e.target.value)} placeholder={t.suggest.howPlaceholder} />
+      <label className={lbl} htmlFor="sf-url">{t.suggest.urlLabel}</label>
       <input id="sf-url" className={inp} value={f.url} onChange={(e) => set("url", e.target.value)} placeholder="https://…" />
       <div className="flex gap-2">
         <div className="flex-1">
-          <label className={lbl} htmlFor="sf-cat">CATEGORY</label>
+          <label className={lbl} htmlFor="sf-cat">{t.suggest.catLabel}</label>
           <select id="sf-cat" className={inp} value={f.cat} onChange={(e) => set("cat", e.target.value as CategoryId)}>
-            {Object.entries(CAT).map(([id, v]) => (
-              <option key={id} value={id}>{v.label}</option>
+            {(Object.keys(CAT) as CategoryId[]).map((id) => (
+              <option key={id} value={id}>{t.cat[id]}</option>
             ))}
           </select>
         </div>
         <div className="flex-1">
-          <label className={lbl} htmlFor="sf-serve">ACCESS TYPE</label>
+          <label className={lbl} htmlFor="sf-serve">{t.suggest.serveLabel}</label>
           <select id="sf-serve" className={inp} value={f.serve} onChange={(e) => set("serve", e.target.value as ServeType)}>
-            <option value="online">Self-serve online</option>
-            <option value="inperson">In person</option>
-            <option value="navigator">Navigator helps</option>
+            <option value="online">{t.serve.online}</option>
+            <option value="inperson">{t.serve.inperson}</option>
+            <option value="navigator">{t.serve.navigator}</option>
           </select>
         </div>
       </div>
       <div className="flex gap-2">
         <div className="flex-1">
-          <label className={lbl} htmlFor="sf-min">MIN AGE</label>
+          <label className={lbl} htmlFor="sf-min">{t.suggest.minAge}</label>
           <input id="sf-min" type="number" className={inp} value={f.minAge} onChange={(e) => set("minAge", e.target.value)} />
         </div>
         <div className="flex-1">
-          <label className={lbl} htmlFor="sf-max">MAX AGE</label>
+          <label className={lbl} htmlFor="sf-max">{t.suggest.maxAge}</label>
           <input id="sf-max" type="number" className={inp} value={f.maxAge} onChange={(e) => set("maxAge", e.target.value)} />
         </div>
       </div>
-      <label className={lbl} htmlFor="sf-submitter">YOUR NAME (optional)</label>
-      <input id="sf-submitter" className={inp} value={f.submitter} onChange={(e) => set("submitter", e.target.value)} placeholder="So we can credit / follow up" />
+      <label className={lbl} htmlFor="sf-submitter">{t.suggest.submitterLabel}</label>
+      <input id="sf-submitter" className={inp} value={f.submitter} onChange={(e) => set("submitter", e.target.value)} placeholder={t.suggest.submitterPlaceholder} />
       {err && (
         <div className="text-[11px] text-cat-identity mb-2" role="alert">
-          {err}
+          {err === "required" ? t.suggest.required : t.suggest.error}
         </div>
       )}
       <button
@@ -149,7 +147,7 @@ export default function SubmitForm() {
         disabled={busy}
         className="w-full bg-ink text-white rounded-lg py-[13px] text-sm font-bold mt-1 disabled:opacity-60"
       >
-        {busy ? "Submitting…" : "Submit for review →"}
+        {busy ? t.suggest.submitting : t.suggest.submit}
       </button>
     </div>
   );

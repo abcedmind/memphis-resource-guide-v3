@@ -1,7 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+
+/** Shows the error the auth callback redirects here with (expired link etc.). */
+function CallbackError() {
+  const params = useSearchParams();
+  const msg = params.get("error");
+  if (!msg) return null;
+  return (
+    <div
+      className="text-[11px] text-cat-identity bg-[#fff0f0] border border-[#e0a0a0] rounded-md px-3 py-2 mb-3 leading-relaxed"
+      role="alert"
+    >
+      {msg}
+    </div>
+  );
+}
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -46,6 +62,9 @@ export default function LoginForm() {
         Admin access uses email magic links — no passwords. Only accounts
         created in the Supabase Auth dashboard can manage the guide.
       </p>
+      <Suspense fallback={null}>
+        <CallbackError />
+      </Suspense>
       <label
         className="text-[10px] tracking-[0.05em] text-[#888] block mb-[3px] font-semibold"
         htmlFor="login-email"

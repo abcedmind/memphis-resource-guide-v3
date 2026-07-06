@@ -120,6 +120,7 @@ export interface DbResource {
   serve: ServeType;
   basic_info_only: boolean;
   is_approved: boolean;
+  sort_order: number;
 }
 
 export interface DbSubmission {

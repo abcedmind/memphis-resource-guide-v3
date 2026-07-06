@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import BrowseView from "@/components/browse/BrowseView";
 import type { AdminApi } from "@/components/browse/GroupBlock";
@@ -30,6 +30,13 @@ export default function AdminResources({
   const [groups, setGroups] = useState(initialGroups);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  // After a failed write we router.refresh() to re-fetch server truth; that
+  // produces a new initialGroups identity, which must replace the optimistic
+  // state (rollback). Successful writes never refresh, so this stays quiet.
+  useEffect(() => {
+    setGroups(initialGroups);
+  }, [initialGroups]);
 
   const fail = useCallback((e: unknown) => {
     setError(

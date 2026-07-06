@@ -3,8 +3,10 @@
 import { useState } from "react";
 import PixelChar from "@/components/PixelChar";
 import ResourceEditor from "@/components/admin/ResourceEditor";
-import { CAT, SERVE_BADGE } from "@/lib/constants";
-import type { Resource, ResourceGroup } from "@/lib/types";
+import { CAT } from "@/lib/constants";
+import { resourceDistanceMiles, sortByDistance } from "@/lib/geo";
+import { useLang } from "@/lib/i18n";
+import type { Resource, ResourceGroup, ServeType } from "@/lib/types";
 
 export interface AdminApi {
   updateResource: (gid: string, rid: string, patch: Partial<Resource>) => void;
@@ -12,12 +14,19 @@ export interface AdminApi {
   addResource: (gid: string, res: Omit<Resource, "id">) => void;
 }
 
+const SERVE_COLOR: Record<ServeType, string> = {
+  online: "#3aab7c",
+  inperson: "#e07c45",
+  navigator: "#9b59b6",
+};
+
 export default function GroupBlock({
   g,
   matches,
   expanded,
   setExpanded,
   adminApi,
+  userLoc,
   demo,
 }: {
   g: ResourceGroup;
@@ -25,12 +34,17 @@ export default function GroupBlock({
   expanded: string | null;
   setExpanded: (k: string | null) => void;
   adminApi?: AdminApi;
+  userLoc?: { lat: number; lng: number } | null;
   demo?: boolean;
 }) {
+  const { t } = useLang();
   const admin = !!adminApi;
   const [editing, setEditing] = useState<string | null>(null); // rid or "new"
   const [confirmId, setConfirmId] = useState<string | null>(null);
-  const visible = g.resources.filter(matches);
+  const filtered = g.resources.filter(matches);
+  const visible = userLoc
+    ? sortByDistance(filtered, userLoc.lat, userLoc.lng)
+    : filtered;
   if (visible.length === 0 && !admin) return null;
 
   return (
@@ -59,7 +73,8 @@ export default function GroupBlock({
             </div>
           )}
           <div className="text-[10px] text-[#aaa] mt-[3px]">
-            {visible.length} program{visible.length !== 1 ? "s" : ""}
+            {visible.length}{" "}
+            {visible.length === 1 ? t.browse.program : t.browse.programs}
           </div>
         </div>
       </div>
@@ -69,6 +84,9 @@ export default function GroupBlock({
           const key = `${g.id}-${res.id}`;
           const open = expanded === key;
           const col = CAT[res.cat]?.color || "#777";
+          const dist = userLoc
+            ? resourceDistanceMiles(res, userLoc.lat, userLoc.lng)
+            : null;
           if (admin && editing === res.id)
             return (
               <ResourceEditor
@@ -103,22 +121,28 @@ export default function GroupBlock({
                     </span>
                   )}
                 </span>
+                {dist !== null && (
+                  <span className="text-[7px] tracking-[0.04em] px-1 py-0.5 rounded-[3px] shrink-0 whitespace-nowrap border border-[#1a1a2e33] text-ink font-bold">
+                    {dist < 10 ? dist.toFixed(1) : Math.round(dist)}{" "}
+                    {t.browse.miAway}
+                  </span>
+                )}
                 {res.serve && (
                   <span
                     className="text-[7px] tracking-[0.04em] px-1 py-0.5 rounded-[3px] shrink-0 whitespace-nowrap border"
                     style={{
-                      color: SERVE_BADGE[res.serve].color,
-                      borderColor: `${SERVE_BADGE[res.serve].color}55`,
+                      color: SERVE_COLOR[res.serve],
+                      borderColor: `${SERVE_COLOR[res.serve]}55`,
                     }}
                   >
-                    {SERVE_BADGE[res.serve].label.toUpperCase()}
+                    {t.serve[res.serve].toUpperCase()}
                   </span>
                 )}
                 <span
                   className="text-[8px] tracking-[0.05em] px-1.5 py-0.5 rounded-[3px] shrink-0 border"
                   style={{ color: col, borderColor: `${col}44` }}
                 >
-                  {CAT[res.cat]?.label}
+                  {t.cat[res.cat] ?? CAT[res.cat]?.label}
                 </span>
               </button>
               {open && (
@@ -127,7 +151,7 @@ export default function GroupBlock({
                     {res.desc}
                   </p>
                   <div className="text-[11px] text-[#666] px-2 py-1.5 bg-[#f5f1eb] rounded mb-[7px] leading-normal">
-                    <b>How to access: </b>
+                    <b>{t.browse.howToAccess}</b>
                     {res.how}
                   </div>
                   {res.url && (

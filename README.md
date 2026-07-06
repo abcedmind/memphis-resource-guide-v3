@@ -2,6 +2,13 @@
 
 A community tool for Memphis, TN families — especially in underserved ZIP codes like 38109/Boxtown — to discover free programs their children qualify for. Families browse programs by age group and community, build a personalized eligibility plan for each child, and can optionally export a Cowork task file so Claude Desktop + Chrome pre-fills registration forms (with review before every submit). v3 is the full-stack migration of the v2 prototype: Next.js App Router + Supabase (Postgres, Auth, RLS), deployable on Vercel, mobile-first for parents on phones with limited bandwidth.
 
+**Beyond the v2 feature set, v3 adds:**
+
+- **Español** — a language toggle in the header switches all UI chrome to Spanish (labels, forms, the consent text, plan view). Resource names/descriptions stay in English by design; they're data, and translating program details wrong is worse than not translating them. Dictionary lives in `src/lib/i18n.tsx`.
+- **PDF export of the family plan** — the "Download as PDF / Print" button renders a print-optimized document (letterhead with generation date, visible URLs, page-break-safe program cards, interactive chrome stripped). Uses the browser's print-to-PDF rather than a PDF library: zero added bundle weight for users on limited data plans.
+- **📍 Near me** — a filter chip that (with permission) sorts each group's programs by distance and shows mileage chips. Only resources with a real front door get distances (coordinates in `src/lib/geo.ts`); online/countywide programs keep their order — a distance number on a phone line would be misleading. Location is used in-page only, never stored or sent anywhere.
+- **Admin dashboard** — `/admin` now shows pending/approved/rejected counts, families saved, 8-week submission and registration trend charts (inline SVG, no chart library), and resources per category.
+
 ## Run locally
 
 ```bash

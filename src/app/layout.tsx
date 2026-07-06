@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Header from "@/components/Header";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import { LangProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const SITE_URL =
@@ -52,12 +53,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <div className="bg-cream min-h-screen max-w-[680px] mx-auto">
-          <Header />
-          <main>{children}</main>
-        </div>
+        <LangProvider>
+          <div className="bg-cream min-h-screen max-w-[680px] mx-auto">
+            <Header />
+            <main>{children}</main>
+          </div>
+        </LangProvider>
         <ServiceWorkerRegister />
       </body>
     </html>

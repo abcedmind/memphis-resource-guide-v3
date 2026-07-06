@@ -55,7 +55,7 @@ async function main() {
 
   // 2) Resources
   const resourceRows = SEED_GROUPS.flatMap((g) =>
-    g.resources.map((r) => ({
+    g.resources.map((r, i) => ({
       id: r.id,
       group_id: g.id,
       name: r.name,
@@ -69,6 +69,7 @@ async function main() {
       serve: r.serve,
       basic_info_only: !!r.basicInfoOnly,
       is_approved: true,
+      sort_order: i, // keep v2's curated within-group order
     }))
   );
   const { error: rErr } = await supabase
