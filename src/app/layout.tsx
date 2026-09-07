@@ -2,10 +2,17 @@ import type { Metadata, Viewport } from "next";
 import Header from "@/components/Header";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { LangProvider } from "@/lib/i18n";
+import { partnerAgreed, partnerOn } from "@/lib/partner";
 import "./globals.css";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Partner mode (src/lib/partner.ts): "designed for" until the Library agrees, never "provided by" before.
+const PARTNER_TAG = !partnerOn
+  ? ""
+  : partnerAgreed
+    ? " A Memphis Public Library resource."
+    : " Designed for the Memphis Public Library.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -14,7 +21,8 @@ export const metadata: Metadata = {
     template: "%s · Memphis Family Resource Guide",
   },
   description:
-    "Free programs for children & families in Shelby County, TN — ages 0–18. Find every free program your child qualifies for: education, health, food, enrichment, technology, and advocacy.",
+    "Free programs for children & families in Shelby County, TN — ages 0–18. Find every free program your child qualifies for: education, health, food, enrichment, technology, and advocacy." +
+    PARTNER_TAG,
   keywords: [
     "Memphis",
     "Shelby County",

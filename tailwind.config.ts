@@ -22,6 +22,9 @@ const config: Config = {
         "band-demo": "#f0ece0",
         "line-sand": "#e8e2da",
         "coral": "#f4645f",
+        // Partner accent (2026-09-07). A PLACEHOLDER — a plain deep teal, not the Memphis
+        // Public Library's brand color. Replace with the Library's value when they send assets.
+        partner: "#2f6f8f",
       },
       fontFamily: {
         sans: [

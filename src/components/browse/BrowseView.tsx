@@ -5,6 +5,8 @@ import { CAT } from "@/lib/constants";
 import { useLang } from "@/lib/i18n";
 import type { CategoryId, Resource, ResourceGroup } from "@/lib/types";
 import GroupBlock, { type AdminApi } from "./GroupBlock";
+import PartnerCallout from "./PartnerCallout";
+import { partnerAgreed, partnerOn } from "@/lib/partner";
 
 const CACHE_KEY = "mfrg-groups-cache-v3";
 
@@ -154,6 +156,9 @@ export default function BrowseView({
         </p>
       )}
 
+      {/* Partner mode (2026-09-07): the library card is the one free thing that unlocks the most below. Public view only. */}
+      {!adminApi && <PartnerCallout />}
+
       {ageGroups.map((g) => (
         <GroupBlock
           key={g.id}
@@ -193,6 +198,12 @@ export default function BrowseView({
         {t.browse.footerLine1}
         <br />
         {t.browse.footerLine2}
+        {partnerOn && (
+          <>
+            <br />
+            {partnerAgreed ? t.partner.footerAgreed : t.partner.footerProposed}
+          </>
+        )}
       </footer>
     </div>
   );

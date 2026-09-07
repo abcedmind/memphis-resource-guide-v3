@@ -100,6 +100,42 @@ export interface Strings {
     printedFrom: string;
     printedOn: string;
   };
+  partner: {
+    proposed: string;
+    agreed: string;
+    navAbout: string;
+    calloutTitle: string;
+    calloutBody: string;
+    calloutCard: string;
+    calloutPass: string;
+    footerProposed: string;
+    footerAgreed: string;
+  };
+  about: {
+    title: string;
+    dataGathered: string;
+    lastReviewed: string;
+    whatTitle: string;
+    whatBody: string;
+    whoTitle: string;
+    whoBody: string;
+    howTitle: string;
+    howBody: string;
+    suggestTitle: string;
+    suggestBody: string;
+    suggestLink: string;
+    sourcesTitle: string;
+    sourcesBody: string;
+    libraryTitle: string;
+    libraryProposed: string;
+    libraryAgreed: string;
+    privacyTitle: string;
+    privacyBody: string;
+    notTitle: string;
+    notBody: string;
+    contactTitle: string;
+    contactBody: string;
+  };
   suggest: {
     intro: string;
     nameLabel: string;
@@ -229,6 +265,53 @@ const en: Strings = {
     printButton: "⬇ Download as PDF / Print",
     printedFrom: "Memphis Family Resource Guide",
     printedOn: "Plan generated",
+  },
+  partner: {
+    proposed: "DESIGNED FOR THE MEMPHIS PUBLIC LIBRARY",
+    agreed: "A MEMPHIS PUBLIC LIBRARY RESOURCE",
+    navAbout: "About",
+    calloutTitle: "START HERE: A LIBRARY CARD",
+    calloutBody:
+      "A Memphis Public Library card is free for Shelby County residents. It opens the Library's own programs, its computers and internet, and the 901 Pass — which also works as a library card and gets a family into every city community center and pool, and the Memphis Zoo on Tuesdays.",
+    calloutCard: "Get a library card",
+    calloutPass: "Get a 901 Pass",
+    footerProposed:
+      "Designed for the Memphis Public Library · Not an official Library publication until the Library says so",
+    footerAgreed: "A Memphis Public Library resource",
+  },
+  about: {
+    title: "About this guide",
+    dataGathered: "Programs gathered",
+    lastReviewed: "Page reviewed",
+    whatTitle: "WHAT IT IS",
+    whatBody:
+      "A list of free programs for children and families in Shelby County, Tennessee, ages 0 to 18, sorted by age group and need. A parent enters a child's age and a few facts; the guide shows the programs that child qualifies for, with how to sign up. Nothing is submitted for you.",
+    whoTitle: "WHO MAKES IT",
+    whoBody:
+      "Zanden Kelly, a student at Rhodes College in Memphis, built it and keeps it. It is a one-person project. It is not funded by, run by, or affiliated with any of the organizations listed in it, unless a page here says otherwise.",
+    howTitle: "HOW THE LIST IS CHECKED",
+    howBody:
+      "Every program was found on the provider's own website or a public listing, and its page is linked on the card. The list was gathered in June 2026 and is checked when someone reports a change, not on a fixed schedule. Programs change their hours, ages and rules without telling anyone. Before relying on a program, open its link or call.",
+    suggestTitle: "HOW TO ADD OR CORRECT A PROGRAM",
+    suggestBody:
+      "Anyone can propose a program or a correction. It is read by a person before it appears here. Use the form at",
+    suggestLink: "Suggest a Resource",
+    sourcesTitle: "WHERE THE INFORMATION COMES FROM",
+    sourcesBody:
+      "Providers' own websites, the Memphis Public Library's public pages, 211 Tennessee, Shelby County and City of Memphis public pages, and school and non-profit listings. Nothing here is copied from a paid database.",
+    libraryTitle: "THE MEMPHIS PUBLIC LIBRARY",
+    libraryProposed:
+      "This edition of the guide was designed for the Memphis Public Library, whose branches are where many families would first look for it. As of the date on this page, the Library has not reviewed or adopted it. The wording on this site will say so until it has. Library card and 901 Pass information comes from the Library's public pages.",
+    libraryAgreed:
+      "This guide is provided as a Memphis Public Library resource. Library card and 901 Pass information comes from the Library's public pages.",
+    privacyTitle: "PRIVACY",
+    privacyBody:
+      "Browsing the guide stores nothing about you. The family plan runs in your browser and is not saved unless you tick the box asking a navigator to follow up. No Social Security numbers, income records or medical information are ever asked for. Location is used only if you turn on Near me, and only to sort by distance.",
+    notTitle: "WHAT THIS GUIDE DOES NOT DO",
+    notBody:
+      "It does not enroll anyone, does not decide eligibility for any program, does not replace 2-1-1, and does not speak for any provider. A card in this guide means a program said it exists and is free; it does not mean there is space, or that your child will be accepted.",
+    contactTitle: "CONTACT",
+    contactBody: "zandenkelly@gmail.com. Corrections are welcome and are usually made within a week.",
   },
   suggest: {
     intro:
@@ -363,6 +446,53 @@ const es: Strings = {
     printButton: "⬇ Descargar como PDF / Imprimir",
     printedFrom: "Guía de Recursos Familiares de Memphis",
     printedOn: "Plan generado",
+  },
+  partner: {
+    proposed: "DISEÑADA PARA LA BIBLIOTECA PÚBLICA DE MEMPHIS",
+    agreed: "UN RECURSO DE LA BIBLIOTECA PÚBLICA DE MEMPHIS",
+    navAbout: "Acerca de",
+    calloutTitle: "EMPIECE AQUÍ: UNA TARJETA DE BIBLIOTECA",
+    calloutBody:
+      "La tarjeta de la Biblioteca Pública de Memphis es gratuita para los residentes del condado de Shelby. Abre los programas de la Biblioteca, sus computadoras e internet, y el 901 Pass, que también sirve como tarjeta de biblioteca y da acceso a todos los centros comunitarios y piscinas de la ciudad, y al zoológico de Memphis los martes.",
+    calloutCard: "Obtener una tarjeta de biblioteca",
+    calloutPass: "Obtener un 901 Pass",
+    footerProposed:
+      "Diseñada para la Biblioteca Pública de Memphis · No es una publicación oficial de la Biblioteca hasta que la Biblioteca lo diga",
+    footerAgreed: "Un recurso de la Biblioteca Pública de Memphis",
+  },
+  about: {
+    title: "Acerca de esta guía",
+    dataGathered: "Programas recopilados en",
+    lastReviewed: "Página revisada el",
+    whatTitle: "QUÉ ES",
+    whatBody:
+      "Una lista de programas gratuitos para niños y familias del condado de Shelby, Tennessee, de 0 a 18 años, ordenada por grupo de edad y necesidad. Un padre o madre ingresa la edad de un niño y algunos datos; la guía muestra los programas para los que ese niño califica y cómo inscribirse. Nada se envía en su nombre.",
+    whoTitle: "QUIÉN LA HACE",
+    whoBody:
+      "Zanden Kelly, estudiante de Rhodes College en Memphis, la construyó y la mantiene. Es un proyecto de una sola persona. No está financiada, dirigida ni afiliada a ninguna de las organizaciones que aparecen en ella, salvo que una página aquí diga lo contrario.",
+    howTitle: "CÓMO SE VERIFICA LA LISTA",
+    howBody:
+      "Cada programa se encontró en el sitio web del proveedor o en un listado público, y su página está enlazada en la tarjeta. La lista se recopiló en junio de 2026 y se revisa cuando alguien informa un cambio, no con un calendario fijo. Los programas cambian horarios, edades y reglas sin avisar. Antes de depender de un programa, abra su enlace o llame.",
+    suggestTitle: "CÓMO AGREGAR O CORREGIR UN PROGRAMA",
+    suggestBody:
+      "Cualquiera puede proponer un programa o una corrección. Una persona lo lee antes de que aparezca aquí. Use el formulario en",
+    suggestLink: "Sugerir un recurso",
+    sourcesTitle: "DE DÓNDE VIENE LA INFORMACIÓN",
+    sourcesBody:
+      "Sitios web de los proveedores, páginas públicas de la Biblioteca Pública de Memphis, 211 Tennessee, páginas públicas del condado de Shelby y de la ciudad de Memphis, y listados de escuelas y organizaciones sin fines de lucro. Nada aquí se copia de una base de datos de pago.",
+    libraryTitle: "LA BIBLIOTECA PÚBLICA DE MEMPHIS",
+    libraryProposed:
+      "Esta edición de la guía fue diseñada para la Biblioteca Pública de Memphis, cuyas sucursales son donde muchas familias la buscarían primero. A la fecha de esta página, la Biblioteca no la ha revisado ni adoptado. El texto de este sitio lo dirá así hasta que lo haga. La información sobre la tarjeta de biblioteca y el 901 Pass proviene de las páginas públicas de la Biblioteca.",
+    libraryAgreed:
+      "Esta guía se ofrece como un recurso de la Biblioteca Pública de Memphis. La información sobre la tarjeta de biblioteca y el 901 Pass proviene de las páginas públicas de la Biblioteca.",
+    privacyTitle: "PRIVACIDAD",
+    privacyBody:
+      "Explorar la guía no guarda nada sobre usted. El plan familiar se ejecuta en su navegador y no se guarda a menos que marque la casilla para que un navegador le dé seguimiento. Nunca se piden números de seguro social, registros de ingresos ni información médica. La ubicación se usa solo si activa Cerca de mí, y solo para ordenar por distancia.",
+    notTitle: "LO QUE ESTA GUÍA NO HACE",
+    notBody:
+      "No inscribe a nadie, no decide la elegibilidad para ningún programa, no reemplaza al 2-1-1 y no habla en nombre de ningún proveedor. Una tarjeta en esta guía significa que un programa dijo que existe y que es gratuito; no significa que haya cupo ni que su hijo será aceptado.",
+    contactTitle: "CONTACTO",
+    contactBody: "zandenkelly@gmail.com. Las correcciones son bienvenidas y normalmente se hacen en una semana.",
   },
   suggest: {
     intro:

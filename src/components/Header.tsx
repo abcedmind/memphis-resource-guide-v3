@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLang } from "@/lib/i18n";
+import { PARTNER, partnerAgreed, partnerOn } from "@/lib/partner";
 
 export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
   const pathname = usePathname();
@@ -13,6 +14,7 @@ export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
     ["/", t.header.navBrowse],
     ["/family", t.header.navFamily],
     ["/suggest", t.header.navSuggest],
+    ["/about", t.partner.navAbout],
   ];
   if (inAdmin || isAdmin) tabs.push(["/admin/resources", t.header.navAdmin]);
 
@@ -26,7 +28,22 @@ export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
           <h1 className="text-[21px] font-extrabold m-0 mb-[3px] tracking-[-0.02em]">
             Memphis Family Resource Guide
           </h1>
-          <p className="text-xs text-[#8888bb] m-0 mb-3.5">{t.header.subtitle}</p>
+          <p className="text-xs text-[#8888bb] m-0 mb-2">{t.header.subtitle}</p>
+          {partnerOn && (
+            <p className="text-[9.5px] tracking-[0.14em] text-[#b7b0e0] m-0 mb-3.5 flex items-center gap-2">
+              {/* The Library's own logo, only if the Library supplied one (public/partner/mpl-logo.svg). */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PARTNER.logo}
+                alt=""
+                className="h-4 w-auto"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+              <span>{partnerAgreed ? t.partner.agreed : t.partner.proposed}</span>
+            </p>
+          )}
         </div>
         <div className="flex gap-1.5 shrink-0 mt-0.5">
           <button

@@ -39,6 +39,18 @@ Admin access uses **email magic links** — no passwords, no shared codes.
 
 > Security model: anyone can *request* a magic link, but only emails that exist as Supabase Auth users receive a working sign-in. All write access to resources/submissions and read access to family registrations is enforced by RLS at the database — not by UI checks.
 
+## Library edition (2026-09-07)
+
+The site carries a partner line for the Memphis Public Library, controlled by `NEXT_PUBLIC_PARTNER` (`src/lib/partner.ts`):
+
+| Value | Header / footer say | When |
+|---|---|---|
+| unset or `mpl-proposed` (default) | "Designed for the Memphis Public Library" | now — a statement about the design, not an agreement |
+| `mpl` | "A Memphis Public Library resource" | **only after the Library agrees in writing** |
+| `off` | nothing | if the Library declines |
+
+Also in partner mode: a "Start here: a library card" callout at the top of Browse (facts from the guide's own Library entries), a partner line in the footer and the page description, and the `/about` page, which states plainly who makes the guide, how the list is checked, and that the Library has not adopted it until the wording changes. The logo slot in the header renders only if `public/partner/mpl-logo.svg` exists — the Library's own file. The `partner` color in `tailwind.config.ts` is a placeholder, not the Library's brand.
+
 ## Deploy to Vercel
 
 1. Push this repo to GitHub, then **Import** it in Vercel (framework auto-detects Next.js).
