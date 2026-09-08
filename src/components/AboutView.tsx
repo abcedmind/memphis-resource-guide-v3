@@ -19,7 +19,7 @@ export default function AboutView() {
   );
   return (
     <div className="px-4 pt-5 pb-10">
-      <h1 className="text-[18px] font-extrabold text-ink mb-1">{a.title}</h1>
+      <h1 className="font-display text-[18px] font-extrabold text-ink mb-1">{a.title}</h1>
       <p className="text-[11px] text-[#777] mb-5">
         {a.dataGathered} {DATA_GATHERED} · {a.lastReviewed} {LAST_REVIEWED}
       </p>

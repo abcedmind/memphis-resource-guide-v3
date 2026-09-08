@@ -62,7 +62,7 @@ export default function GroupBlock({
         )}
         <div className="flex-1 pb-[3px]">
           <h2
-            className="text-[11px] font-extrabold tracking-[0.12em]"
+            className="font-display text-[11px] font-extrabold tracking-[0.12em]"
             style={{ color: g.color }}
           >
             {g.label}
@@ -103,7 +103,7 @@ export default function GroupBlock({
           return (
             <article
               key={key}
-              className="bg-white rounded-md mb-1.5 border border-line-sand overflow-hidden"
+              className="bg-white rounded-card mb-1.5 border border-line-sand overflow-hidden"
               style={{ borderLeft: `4px solid ${col}` }}
             >
               <button
@@ -122,7 +122,7 @@ export default function GroupBlock({
                   )}
                 </span>
                 {dist !== null && (
-                  <span className="text-[7px] tracking-[0.04em] px-1 py-0.5 rounded-[3px] shrink-0 whitespace-nowrap border border-[#1a1a2e33] text-ink font-bold">
+                  <span className="text-[7px] tracking-[0.04em] px-1 py-0.5 rounded-[3px] shrink-0 whitespace-nowrap border border-[var(--chrome-hairline)] text-ink font-bold">
                     {dist < 10 ? dist.toFixed(1) : Math.round(dist)}{" "}
                     {t.browse.miAway}
                   </span>

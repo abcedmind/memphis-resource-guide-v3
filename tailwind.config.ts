@@ -5,9 +5,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#faf7f2",
-        ink: "#1a1a2e",
-        "ink-deep": "#0f0f1f",
+        // Chrome tokens (header/body/background) are CSS custom properties so
+        // partner mode can retheme them site-wide from one place: see
+        // globals.css `:root` (default look) and `[data-partner]` (MPL look).
+        cream: "var(--color-cream)",
+        ink: "var(--color-ink)",
+        "ink-deep": "var(--color-ink-deep)",
         "cat-education": "#4a7fcf",
         "cat-health": "#3aab7c",
         "cat-food": "#e07c45",
@@ -22,18 +25,25 @@ const config: Config = {
         "band-demo": "#f0ece0",
         "line-sand": "#e8e2da",
         "coral": "#f4645f",
-        // Partner accent (2026-09-07). A PLACEHOLDER — a plain deep teal, not the Memphis
-        // Public Library's brand color. Replace with the Library's value when they send assets.
-        partner: "#2f6f8f",
+        // Partner accents (2026-09-07, retuned 2026-09-08 from the Library's own
+        // site — see docs/MPL-ASSETS.md and globals.css for sourcing). Off partner
+        // mode these resolve to the original placeholder teal so the default guide
+        // is unchanged; see globals.css for the values used in each mode.
+        partner: "var(--color-partner)",
+        "partner-accent": "var(--color-partner-accent)",
       },
       fontFamily: {
-        sans: [
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "Roboto",
-          "sans-serif",
-        ],
+        sans: ["var(--font-sans)", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+        // Display face for large/hero headings only. Falls back to --font-sans
+        // (and its own system fallbacks) when no partner font is loaded.
+        display: ["var(--font-display)", "var(--font-sans)", "system-ui", "sans-serif"],
+      },
+      borderRadius: {
+        // Card/chip radius as tokens: square-ish under the Library's flatter
+        // button convention, the guide's own rounder default otherwise.
+        card: "var(--radius-card)",
+        chip: "var(--radius-chip)",
+        button: "var(--radius-button)",
       },
     },
   },

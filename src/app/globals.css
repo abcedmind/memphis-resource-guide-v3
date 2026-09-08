@@ -6,8 +6,80 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/*
+ * Theme tokens. Default values below are the guide's original look —
+ * untouched when NEXT_PUBLIC_PARTNER is "off" or unset in a way that
+ * doesn't match the [data-partner] selectors below.
+ */
+:root {
+  --color-cream: #faf7f2;
+  --color-ink: #1a1a2e;
+  --color-ink-deep: #0f0f1f;
+  /* Partner accents when partner mode is off: the original placeholder
+     teal from the 2026-09-07 partner-mode commit. Not brand color of
+     anything; just a visible "this is a link" color. */
+  --color-partner: #2f6f8f;
+  --color-partner-accent: #2f6f8f;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-sans);
+  --radius-card: 0.375rem; /* current rounded-md */
+  --radius-button: 0.5rem; /* current rounded-lg */
+  --radius-chip: 0.75rem; /* current rounded-xl */
+  /* Header/footer "chrome" text tints (Header.tsx, BrowseView.tsx). Default
+     values are the guide's original hardcoded hex, now routed through
+     variables so partner mode can retint them without a fork of the markup. */
+  --chrome-eyebrow: #6666aa;
+  --chrome-subtitle: #8888bb;
+  --chrome-nav: #9999cc;
+  --chrome-border: #3a3a5a;
+  --chrome-line: #b7b0e0;
+  --chrome-hairline: #1a1a2e33; /* original: text-ink at ~20% */
+}
+
+/*
+ * Memphis Public Library design language, applied only when partner mode is
+ * on (NEXT_PUBLIC_PARTNER=mpl-proposed or mpl). Sourced 2026-09-08 by fetching
+ * https://www.memphislibrary.org (WordPress/Customizr Pro theme) and its
+ * loaded stylesheets — see docs/MPL-ASSETS.md and the session report for the
+ * exact URLs. Observed, not invented:
+ *   #aa2025  primary maroon  — "My Account" button, nav hover, dominant color
+ *            (746 occurrences in the page's own compiled CSS)
+ *   #017DB7  secondary blue  — "Donate" button
+ *   #36454F  body/nav text charcoal
+ *   Roboto   body/heading font (site-wide, via Google Fonts + theme CSS)
+ *   Oswald   hero/slider caption display font
+ *   buttons  flat — no border-radius declared on the library's own CTA buttons
+ * Tints below that are NOT a hex seen on the library's site (the header/nav
+ * "chrome" shades, since memphislibrary.org has no dark header to sample) are
+ * derived from the charcoal/maroon above and marked as such in the session report.
+ */
+[data-partner="mpl-proposed"],
+[data-partner="mpl"] {
+  --color-cream: #f5f3ef;
+  --color-ink: #36454f;
+  --color-ink-deep: #24303a;
+  --color-partner: #aa2025;
+  --color-partner-accent: #017db7;
+  --font-sans: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Oswald", var(--font-sans);
+  --radius-card: 0.125rem;
+  --radius-button: 0.125rem;
+  --radius-chip: 0.125rem;
+  --chrome-eyebrow: #aab6bd;
+  --chrome-subtitle: #c7d0d5;
+  --chrome-nav: #d3dadd;
+  --chrome-border: #4d5b66;
+  --chrome-line: #ddb3b5;
+  --chrome-hairline: #36454f33; /* charcoal at ~20% */
+}
+
 body {
   background: #e8e4dc; /* gutter around the 680px column on wide screens */
+}
+
+[data-partner="mpl-proposed"] body,
+[data-partner="mpl"] body {
+  background: #e4e0e6; /* gutter tint, adapted from the charcoal/maroon pair above */
 }
 
 @media print {

@@ -22,15 +22,15 @@ export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
     <header className="bg-ink text-white px-5 pt-[22px] print:hidden">
       <div className="flex justify-between items-start">
         <div>
-          <div className="text-[9px] tracking-[0.2em] text-[#6666aa] mb-1.5">
+          <div className="text-[9px] tracking-[0.2em] text-[var(--chrome-eyebrow)] mb-1.5">
             v3 · SHELBY COUNTY, TN
           </div>
-          <h1 className="text-[21px] font-extrabold m-0 mb-[3px] tracking-[-0.02em]">
+          <h1 className="font-display text-[21px] font-extrabold m-0 mb-[3px] tracking-[-0.02em]">
             Memphis Family Resource Guide
           </h1>
-          <p className="text-xs text-[#8888bb] m-0 mb-2">{t.header.subtitle}</p>
+          <p className="text-xs text-[var(--chrome-subtitle)] m-0 mb-2">{t.header.subtitle}</p>
           {partnerOn && (
-            <p className="text-[9.5px] tracking-[0.14em] text-[#b7b0e0] m-0 mb-3.5 flex items-center gap-2">
+            <p className="text-[9.5px] tracking-[0.14em] text-[var(--chrome-line)] m-0 mb-3.5 flex items-center gap-2">
               {/* The Library's own logo, only if the Library supplied one (public/partner/mpl-logo.svg). */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -49,7 +49,7 @@ export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
           <button
             onClick={() => setLang(lang === "en" ? "es" : "en")}
             aria-label={t.header.langToggleAria}
-            className="text-[9px] tracking-[0.08em] px-2 py-1 rounded border bg-transparent border-[#3a3a5a] text-[#9999cc] hover:text-white hover:border-[#6666aa]"
+            className="text-[9px] tracking-[0.08em] px-2 py-1 rounded border bg-transparent border-[var(--chrome-border)] text-[var(--chrome-nav)] hover:text-white hover:border-[var(--chrome-eyebrow)]"
           >
             {lang === "en" ? "ESPAÑOL" : "ENGLISH"}
           </button>
@@ -59,7 +59,7 @@ export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
             className={`text-[9px] tracking-[0.08em] px-2 py-1 rounded border ${
               inAdmin
                 ? "bg-cat-identity border-cat-identity text-white"
-                : "bg-transparent border-[#3a3a5a] text-[#6666aa] hover:text-[#9999cc]"
+                : "bg-transparent border-[var(--chrome-border)] text-[var(--chrome-eyebrow)] hover:text-[var(--chrome-nav)]"
             }`}
           >
             {inAdmin ? t.header.signOut : t.header.admin}
@@ -81,7 +81,7 @@ export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
               className={`flex-1 text-center rounded-t-md px-1 py-[9px] text-[11px] ${
                 active
                   ? "bg-cream text-ink font-bold"
-                  : "bg-transparent text-[#9999cc] font-normal hover:text-white"
+                  : "bg-transparent text-[var(--chrome-nav)] font-normal hover:text-white"
               }`}
             >
               {lbl}

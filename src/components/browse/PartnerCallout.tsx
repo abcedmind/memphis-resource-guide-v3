@@ -15,15 +15,18 @@ export default function PartnerCallout() {
   return (
     <aside
       aria-label={t.partner.calloutTitle}
-      className="mx-4 mt-4 mb-1 rounded-md border-l-4 border-partner bg-white px-4 py-3"
+      className="mx-4 mt-4 mb-1 rounded-card border-l-4 border-partner bg-white px-4 py-3"
     >
-      <div className="text-[10px] tracking-[0.15em] text-partner font-extrabold mb-1">
+      <div className="font-display text-[10px] tracking-[0.15em] text-partner font-extrabold mb-1">
         {t.partner.calloutTitle}
       </div>
       <p className="text-[13px] leading-[1.5] text-ink m-0 mb-2">
         {t.partner.calloutBody}
       </p>
       <div className="flex flex-wrap gap-3 text-[12px]">
+        {/* Two CTAs, two colors — mirrors the split on the Library's own
+            header (maroon "My Account" / blue "Donate"): the card, like an
+            account, gets the maroon; the 901 Pass gets the blue. */}
         <a
           href={PARTNER.cardUrl}
           target="_blank"
@@ -36,7 +39,7 @@ export default function PartnerCallout() {
           href={PARTNER.passUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-partner font-bold underline"
+          className="text-partner-accent font-bold underline"
         >
           {t.partner.calloutPass} →
         </a>

@@ -114,7 +114,7 @@ export default function BrowseView({
               key={c.id}
               onClick={() => setFilter(c.id)}
               aria-pressed={on}
-              className="text-[9px] tracking-[0.06em] px-[9px] py-1 rounded-xl border-[1.5px]"
+              className="text-[9px] tracking-[0.06em] px-[9px] py-1 rounded-chip border-[1.5px]"
               style={{
                 borderColor: on ? col : "#ddd",
                 background: on ? col : "transparent",
@@ -129,10 +129,10 @@ export default function BrowseView({
         <button
           onClick={toggleNearMe}
           aria-pressed={nearOn}
-          className="text-[9px] tracking-[0.06em] px-[9px] py-1 rounded-xl border-[1.5px]"
+          className="text-[9px] tracking-[0.06em] px-[9px] py-1 rounded-chip border-[1.5px]"
           style={{
-            borderColor: nearOn ? "#1a1a2e" : "#ddd",
-            background: nearOn ? "#1a1a2e" : "transparent",
+            borderColor: nearOn ? "var(--color-ink)" : "#ddd",
+            background: nearOn ? "var(--color-ink)" : "transparent",
             color: nearOn ? "#fff" : "#888",
             fontWeight: nearOn ? 700 : 400,
           }}
@@ -173,10 +173,10 @@ export default function BrowseView({
 
       {/* Demographic divider */}
       <div className="bg-ink text-white px-[18px] pt-4 pb-3.5 mt-1.5">
-        <div className="text-[9px] tracking-[0.2em] text-[#6666aa] mb-1">
+        <div className="text-[9px] tracking-[0.2em] text-[var(--chrome-eyebrow)] mb-1">
           {t.browse.dividerTitle}
         </div>
-        <div className="text-xs text-[#aab] leading-relaxed">
+        <div className="text-xs text-[var(--chrome-subtitle)] leading-relaxed">
           {t.browse.dividerBody}
         </div>
       </div>
