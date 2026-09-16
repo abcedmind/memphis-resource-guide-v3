@@ -29,3 +29,6 @@ next-env.d.ts
 # vercel
 .vercel
 .env*
+
+# local Claude Code permission cache — never published
+.claude/settings.local.json
