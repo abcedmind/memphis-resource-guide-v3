@@ -17,11 +17,21 @@ cp .env.example .env.local   # keys for this project are pre-filled
 npm run dev                  # http://localhost:3000
 ```
 
-The app works even before the database is set up — it falls back to the bundled seed data for browsing and family plans. Submissions and opt-in registrations need the database.
+The app works even before the database is set up — it falls back to the bundled seed data for browsing and family plans. Submissions and opt-in registrations need a store (next section).
+
+## Where the forms save
+
+`/suggest` and the family form's "have a navigator follow up" box post to the site's own API routes (`src/app/api/suggest`, `src/app/api/follow-up`). `src/lib/submission.ts` checks and trims what they send; `src/lib/store.ts` saves it:
+
+- `DATABASE_URL` set → any Postgres (production: Neon's free plan via Vercel's Neon integration; tables are created on first save).
+- otherwise → the Supabase project in `NEXT_PUBLIC_SUPABASE_*`.
+- neither → 503, and the Suggest form offers a pre-filled email instead.
+
+`npm run test:store` checks the validation; with `TEST_DATABASE_URL` pointing at a throwaway Postgres it also saves and reads back one row of each. `/api/keepalive` (Vercel Cron, `vercel.json`) reports the store and pings Supabase so a free project isn't paused for inactivity. Switching steps: `DEPLOY-NOTES.md`.
 
 ## Set up the database (once)
 
-1. Open the Supabase dashboard → **SQL Editor** and run the entire contents of [`supabase/schema.sql`](supabase/schema.sql). This creates the four tables (`resource_groups`, `resources`, `submissions`, `registrations`) and all Row Level Security policies.
+1. Open the Supabase dashboard → **Authentication → Sign In / Providers (older dashboards: Authentication → Settings)** and turn off "Allow new users to sign up". Then **SQL Editor** → run the entire contents of [`supabase/schema.sql`](supabase/schema.sql). This creates the four tables (`resource_groups`, `resources`, `submissions`, `registrations`), the `admin_emails` allowlist and all Row Level Security policies. Safe to re-run.
 2. Get your **secret key**: dashboard → Settings → API Keys → Secret keys (`sb_secret_...`). Put it in `.env.local` as `SUPABASE_SECRET_KEY`. Never expose it client-side or commit it.
 3. Seed all groups and resources:
 
@@ -37,7 +47,7 @@ Admin access uses **email magic links** — no passwords, no shared codes.
 2. In **Authentication → URL Configuration**, set the Site URL to your deployed domain and add `https://your-domain/auth/callback` (and `http://localhost:3000/auth/callback` for dev) to the redirect allowlist.
 3. Visit `/admin`, enter that email, click the link in the inbox. Done.
 
-> Security model: anyone can *request* a magic link, but only emails that exist as Supabase Auth users receive a working sign-in. All write access to resources/submissions and read access to family registrations is enforced by RLS at the database — not by UI checks.
+> Security model: the login form asks Supabase for a magic link with `shouldCreateUser: false`, and the RLS policies admit only emails listed in the `admin_emails` table (`supabase/schema.sql`). Also turn off **Authentication → Sign In / Providers (older dashboards: Authentication → Settings) → "Allow new users to sign up"**: Supabase's default is to create an account for any email that asks, and before 2026-09-28 the policies treated every signed-in account as an admin. All write access to resources/submissions and read access to family registrations is enforced by RLS at the database — not by UI checks.
 
 ## Design (2026-09-28)
 
@@ -72,11 +82,16 @@ The Memphis Public Library edition (partner mode, "Designed for the Memphis Publ
 src/lib/eligibility.ts       eligibility engine (pure functions, v2-identical)
 src/lib/seed-data.ts         complete v2 dataset — seed source + offline fallback
 src/lib/data.ts              Supabase fetch + graceful fallback
+src/lib/submission.ts        what the two public forms may store (checks, caps)
+src/lib/store.ts             where they're saved: Postgres (DATABASE_URL) or Supabase
+src/app/api/…                /api/suggest, /api/follow-up, /api/keepalive
 src/components/…             browse, family plan, submit, admin UI
 src/app/…                    routes: / /family /suggest /admin/* /auth/*
 supabase/schema.sql          tables + RLS policies
 scripts/seed.ts              npm run seed
 scripts/test-eligibility.ts  npm run test:eligibility — proves parity with v2
+scripts/test-store.ts        npm run test:store — form checks (+ optional Postgres round trip)
+vercel.json                  Vercel Cron: /api/keepalive three times a day
 public/sw.js                 offline browse-mode caching
 ```
 

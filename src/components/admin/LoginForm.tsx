@@ -32,6 +32,10 @@ export default function LoginForm() {
       const { error } = await supabase.auth.signInWithOtp({
         email: email.trim(),
         options: {
+          // Never create an account from this form. Supabase's default is to
+          // sign up any new email, and the RLS policies treat every signed-in
+          // user as an admin, so without this anyone could read registrations.
+          shouldCreateUser: false,
           emailRedirectTo: `${window.location.origin}/auth/callback?next=/admin/resources`,
         },
       });

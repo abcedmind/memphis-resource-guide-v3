@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { buildPlan } from "@/lib/eligibility";
 import { useLang } from "@/lib/i18n";
 import type { ChildInput, FamilyNeeds, FamilyPlan, FlatResource } from "@/lib/types";
@@ -48,15 +47,20 @@ export default function FamilyForm({
     if (optIn) {
       setSaveState("saving");
       try {
-        const supabase = createClient();
-        const { error } = await supabase.from("registrations").insert({
-          parent_name: parent || null,
-          contact: contact || null,
-          zip: zip || null,
-          children: children.filter((c) => c.age !== ""),
-          family_needs: fam,
+        // Saved by the site's own server (src/app/api/follow-up), which picks
+        // the store (src/lib/store.ts) and keeps only the fields listed there.
+        const res = await fetch("/api/follow-up", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            parent,
+            contact,
+            zip,
+            children: children.filter((c) => c.age !== ""),
+            fam,
+          }),
         });
-        setSaveState(error ? "error" : "saved");
+        setSaveState(res.ok ? "saved" : "error");
       } catch {
         setSaveState("error");
       }

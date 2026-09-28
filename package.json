@@ -9,17 +9,20 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx scripts/seed.ts",
-    "test:eligibility": "tsx scripts/test-eligibility.ts"
+    "test:eligibility": "tsx scripts/test-eligibility.ts",
+    "test:store": "tsx scripts/test-store.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.10",
     "next": "^14.2.21",
+    "pg": "8.23.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.17.10",
+    "@types/pg": "8.23.1",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.20",

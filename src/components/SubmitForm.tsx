@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { CAT } from "@/lib/constants";
 import { useLang } from "@/lib/i18n";
 import type { CategoryId, ServeType } from "@/lib/types";
@@ -40,7 +39,7 @@ const EMPTY: FormState = {
   submitter: "",
 };
 
-/** The same suggestion as a pre-filled email, for when the form can't reach the database. */
+/** The same suggestion as a pre-filled email, for when the form can't be saved. */
 function mailtoFor(f: FormState) {
   const body = [
     `Program: ${f.name}`,
@@ -73,20 +72,24 @@ export default function SubmitForm() {
     setBusy(true);
     setErr(null);
     try {
-      const supabase = createClient();
-      const { error } = await supabase.from("submissions").insert({
-        name: f.name.trim(),
-        category: f.cat,
-        description: f.desc.trim(),
-        how_to_access: f.how || null,
-        url: f.url || null,
-        min_age: Number(f.minAge) || 0,
-        max_age: Number(f.maxAge) || 99,
-        serve: f.serve,
-        target_group: "all",
-        submitter_name: f.submitter || null,
+      // Saved by the site's own server (src/app/api/suggest), which picks the
+      // store (src/lib/store.ts). Any failure → the email fallback below.
+      const res = await fetch("/api/suggest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: f.name,
+          cat: f.cat,
+          desc: f.desc,
+          how: f.how,
+          url: f.url,
+          minAge: f.minAge,
+          maxAge: f.maxAge,
+          serve: f.serve,
+          submitter: f.submitter,
+        }),
       });
-      if (error) throw error;
+      if (!res.ok) throw new Error(`suggest ${res.status}`);
       setDone(true);
     } catch {
       setErr("network");

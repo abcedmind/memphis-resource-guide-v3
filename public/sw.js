@@ -35,8 +35,13 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
-  // Never cache auth or admin traffic.
-  if (url.pathname.startsWith("/admin") || url.pathname.startsWith("/auth")) return;
+  // Never cache auth, admin or API traffic.
+  if (
+    url.pathname.startsWith("/admin") ||
+    url.pathname.startsWith("/auth") ||
+    url.pathname.startsWith("/api/")
+  )
+    return;
 
   // Immutable build assets: cache-first.
   if (url.pathname.startsWith("/_next/static/")) {
