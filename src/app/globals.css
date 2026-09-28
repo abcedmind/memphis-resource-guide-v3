@@ -7,30 +7,51 @@ html {
 }
 
 body {
-  background: #e8e4dc; /* gutter around the 680px column on wide screens */
+  background: #f4f5f7;
+  color: #1b1f24;
+}
+
+/* One visible focus style everywhere, for keyboard users. */
+:focus-visible {
+  outline: 3px solid #3d7fc0;
+  outline-offset: 2px;
+}
+
+input[type="checkbox"] {
+  accent-color: #1d5a8e;
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* Hide the horizontal scrollbar on the chip and tab rows; they still scroll by touch. */
+.scroll-row {
+  scrollbar-width: none;
+}
+.scroll-row::-webkit-scrollbar {
+  display: none;
 }
 
 @media print {
   header,
   nav,
+  footer,
   .print\:hidden {
     display: none !important;
   }
-  body {
-    background: #fff;
+  body,
+  main {
+    background: #fff !important;
   }
-  /* The family plan prints as a clean document: full width, no card
-     shadows, readable ink-on-paper contrast, page breaks between kids. */
+  /* The family plan prints as a clean document: full width, no borders
+     that waste ink, page breaks kept out of program entries. */
   @page {
     margin: 0.6in;
   }
-  .bg-cream,
-  .max-w-\[680px\] {
+  .max-w-page {
     max-width: 100% !important;
-    background: #fff !important;
   }
   a {
-    color: #1a1a2e !important;
+    color: #1b1f24 !important;
   }
   .print\:break-inside-avoid {
     break-inside: avoid;

@@ -1,18 +1,21 @@
 import type { Metadata, Viewport } from "next";
+import { Public_Sans } from "next/font/google";
 import Header from "@/components/Header";
+import SiteFooter from "@/components/SiteFooter";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { LangProvider } from "@/lib/i18n";
-import { partnerAgreed, partnerOn } from "@/lib/partner";
 import "./globals.css";
+
+// Public Sans: an open-source, neutral typeface drawn for public-service sites.
+// Self-hosted by next/font at build time; no request to Google from the browser.
+const sans = Public_Sans({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-sans",
+});
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-// Partner mode (src/lib/partner.ts): "designed for" until the Library agrees, never "provided by" before.
-const PARTNER_TAG = !partnerOn
-  ? ""
-  : partnerAgreed
-    ? " A Memphis Public Library resource."
-    : " Designed for the Memphis Public Library.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -21,8 +24,7 @@ export const metadata: Metadata = {
     template: "%s · Memphis Family Resource Guide",
   },
   description:
-    "Free programs for children & families in Shelby County, TN — ages 0–18. Find every free program your child qualifies for: education, health, food, enrichment, technology, and advocacy." +
-    PARTNER_TAG,
+    "Free programs for children & families in Shelby County, TN — ages 0–18. Find every free program your child qualifies for: education, health, food, enrichment, technology, and advocacy.",
   keywords: [
     "Memphis",
     "Shelby County",
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1a1a2e",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -61,13 +63,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="font-sans antialiased">
+    <html lang="en" className={sans.variable} suppressHydrationWarning>
+      <body className="font-sans antialiased min-h-screen flex flex-col">
         <LangProvider>
-          <div className="bg-cream min-h-screen max-w-[680px] mx-auto">
-            <Header />
-            <main>{children}</main>
-          </div>
+          <Header />
+          <main className="flex-1 w-full">{children}</main>
+          <SiteFooter />
         </LangProvider>
         <ServiceWorkerRegister />
       </body>

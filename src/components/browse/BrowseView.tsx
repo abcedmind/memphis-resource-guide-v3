@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { CAT } from "@/lib/constants";
 import { useLang } from "@/lib/i18n";
 import type { CategoryId, Resource, ResourceGroup } from "@/lib/types";
 import GroupBlock, { type AdminApi } from "./GroupBlock";
-import PartnerCallout from "./PartnerCallout";
-import { partnerAgreed, partnerOn } from "@/lib/partner";
 
 const CACHE_KEY = "mfrg-groups-cache-v3";
 
@@ -18,6 +17,29 @@ type GeoState =
   | { status: "on"; lat: number; lng: number }
   | { status: "denied" }
   | { status: "unavailable" };
+
+function PinIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </svg>
+  );
+}
+
+const chip =
+  "inline-flex items-center gap-1.5 h-9 px-3.5 rounded-full border text-sm whitespace-nowrap transition-colors";
 
 export default function BrowseView({
   initialGroups,
@@ -97,114 +119,123 @@ export default function BrowseView({
   const displayGroups = adminApi ? initialGroups : groups;
   const ageGroups = displayGroups.filter((g) => g.kind === "age");
   const demoGroups = displayGroups.filter((g) => g.kind === "demo");
+  // Counted from the data on the page, never typed in.
+  const programCount = new Set(
+    displayGroups.flatMap((g) => g.resources.map((r) => r.id))
+  ).size;
 
   return (
     <div>
+      {!adminApi && (
+        <div className="max-w-page mx-auto px-4 pt-6 pb-5">
+          <p className="text-lg leading-relaxed text-ink m-0">
+            {t.browse.lead.replace("{n}", String(programCount))}
+          </p>
+          <p className="text-base text-muted mt-2 mb-0">
+            {t.browse.leadPlan}{" "}
+            <Link href="/family" className="text-primary font-semibold underline underline-offset-2">
+              {t.browse.leadPlanLink}
+            </Link>
+            .
+          </p>
+        </div>
+      )}
+
       {/* Filter bar */}
-      <div
-        className="bg-white border-b border-line-sand px-3.5 py-2.5 flex gap-1.5 flex-wrap sticky top-0 z-10"
-        role="group"
-        aria-label={t.browse.filterAria}
-      >
-        {ALL_CATS.map((c) => {
-          const col = c.id === "all" ? "#444" : CAT[c.id as CategoryId].color;
-          const on = filter === c.id;
-          return (
-            <button
-              key={c.id}
-              onClick={() => setFilter(c.id)}
-              aria-pressed={on}
-              className="text-[9px] tracking-[0.06em] px-[9px] py-1 rounded-xl border-[1.5px]"
-              style={{
-                borderColor: on ? col : "#ddd",
-                background: on ? col : "transparent",
-                color: on ? "#fff" : "#888",
-                fontWeight: on ? 700 : 400,
-              }}
-            >
-              {c.label}
-            </button>
-          );
-        })}
-        <button
-          onClick={toggleNearMe}
-          aria-pressed={nearOn}
-          className="text-[9px] tracking-[0.06em] px-[9px] py-1 rounded-xl border-[1.5px]"
-          style={{
-            borderColor: nearOn ? "#1a1a2e" : "#ddd",
-            background: nearOn ? "#1a1a2e" : "transparent",
-            color: nearOn ? "#fff" : "#888",
-            fontWeight: nearOn ? 700 : 400,
-          }}
+      <div className="sticky top-0 z-10 bg-white border-y border-line print:hidden">
+        <div
+          className="scroll-row max-w-page mx-auto px-4 py-2.5 flex gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible"
+          role="group"
+          aria-label={t.browse.filterAria}
         >
-          {geo.status === "locating"
-            ? "📍 …"
-            : geo.status === "on"
-              ? t.browse.nearMeActive
-              : t.browse.nearMe}
-        </button>
+          {ALL_CATS.map((c) => {
+            const on = filter === c.id;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setFilter(c.id)}
+                aria-pressed={on}
+                className={`${chip} ${
+                  on
+                    ? "bg-ink border-ink text-white font-semibold"
+                    : "bg-white border-line-strong text-ink hover:bg-canvas"
+                }`}
+              >
+                {c.label}
+              </button>
+            );
+          })}
+          <span className="w-px shrink-0 bg-line my-1 sm:hidden" aria-hidden="true" />
+          <button
+            type="button"
+            onClick={toggleNearMe}
+            aria-pressed={nearOn}
+            className={`${chip} ${
+              nearOn
+                ? "bg-primary border-primary text-white font-semibold"
+                : "bg-white border-line-strong text-primary hover:bg-primary-tint"
+            }`}
+          >
+            <PinIcon />
+            {geo.status === "locating"
+              ? t.browse.locating
+              : geo.status === "on"
+                ? t.browse.nearMeActive
+                : t.browse.nearMe}
+          </button>
+        </div>
       </div>
 
       {(geo.status === "denied" || geo.status === "unavailable") && (
-        <p
-          role="status"
-          className="text-[10px] text-[#996] bg-[#fdf8ec] border-b border-[#eee2c0] px-4 py-2 m-0"
-        >
-          {geo.status === "denied"
-            ? t.browse.nearMeDenied
-            : t.browse.nearMeUnavailable}
-        </p>
+        <div className="max-w-page mx-auto px-4 pt-3">
+          <p
+            role="status"
+            className="text-sm text-ink bg-white border border-line rounded px-3 py-2 m-0"
+          >
+            {geo.status === "denied"
+              ? t.browse.nearMeDenied
+              : t.browse.nearMeUnavailable}
+          </p>
+        </div>
       )}
 
-      {/* Partner mode (2026-09-07): the library card is the one free thing that unlocks the most below. Public view only. */}
-      {!adminApi && <PartnerCallout />}
+      <div className="max-w-page mx-auto px-4">
+        {ageGroups.map((g) => (
+          <GroupBlock
+            key={g.id}
+            g={g}
+            matches={matches}
+            expanded={expanded}
+            setExpanded={setExpanded}
+            adminApi={adminApi}
+            userLoc={userLoc}
+          />
+        ))}
 
-      {ageGroups.map((g) => (
-        <GroupBlock
-          key={g.id}
-          g={g}
-          matches={matches}
-          expanded={expanded}
-          setExpanded={setExpanded}
-          adminApi={adminApi}
-          userLoc={userLoc}
-        />
-      ))}
+        {/* Demographic section */}
+        <div className="mt-12 pt-5 border-t-4 border-ink">
+          <h2 className="text-2xl font-bold leading-tight text-ink m-0">
+            {t.browse.dividerTitle}
+          </h2>
+          <p className="text-base leading-relaxed text-muted mt-2 mb-0">
+            {t.browse.dividerBody}
+          </p>
+        </div>
 
-      {/* Demographic divider */}
-      <div className="bg-ink text-white px-[18px] pt-4 pb-3.5 mt-1.5">
-        <div className="text-[9px] tracking-[0.2em] text-[#6666aa] mb-1">
-          {t.browse.dividerTitle}
-        </div>
-        <div className="text-xs text-[#aab] leading-relaxed">
-          {t.browse.dividerBody}
-        </div>
+        {demoGroups.map((g) => (
+          <GroupBlock
+            key={g.id}
+            g={g}
+            matches={matches}
+            expanded={expanded}
+            setExpanded={setExpanded}
+            adminApi={adminApi}
+            userLoc={userLoc}
+            demo
+          />
+        ))}
       </div>
-
-      {demoGroups.map((g) => (
-        <GroupBlock
-          key={g.id}
-          g={g}
-          matches={matches}
-          expanded={expanded}
-          setExpanded={setExpanded}
-          adminApi={adminApi}
-          userLoc={userLoc}
-          demo
-        />
-      ))}
-
-      <footer className="px-4 pt-5 pb-9 text-[10px] text-[#bbb] text-center leading-[1.7]">
-        {t.browse.footerLine1}
-        <br />
-        {t.browse.footerLine2}
-        {partnerOn && (
-          <>
-            <br />
-            {partnerAgreed ? t.partner.footerAgreed : t.partner.footerProposed}
-          </>
-        )}
-      </footer>
     </div>
   );
 }

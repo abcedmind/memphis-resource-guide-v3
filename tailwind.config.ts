@@ -1,39 +1,56 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Design tokens (2026-09-28). One restrained civic palette: near-black ink,
+ * one blue for actions and links, neutral greys for structure. Every text
+ * color below measures at least 4.5:1 against white and against `canvas`
+ * (WCAG AA); `line-strong` is 3:1 for input borders. Category colors are
+ * only ever used as text on their own light tint, never as fills.
+ *
+ * `cream`, `line-sand`, `cat-*` and `serve-online` keep their old names so
+ * the admin screens pick up the new palette without a rewrite.
+ */
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        cream: "#faf7f2",
-        ink: "#1a1a2e",
-        "ink-deep": "#0f0f1f",
-        "cat-education": "#4a7fcf",
-        "cat-health": "#3aab7c",
-        "cat-food": "#e07c45",
-        "cat-enrichment": "#9b59b6",
-        "cat-technology": "#2980b9",
-        "cat-identity": "#c0397b",
-        "serve-online": "#3aab7c",
-        "serve-inperson": "#e07c45",
-        "serve-navigator": "#9b59b6",
-        "group-all": "#2d2b52",
-        "band-sand": "#eee9e0",
-        "band-demo": "#f0ece0",
-        "line-sand": "#e8e2da",
-        "coral": "#f4645f",
-        // Partner accent (2026-09-07). A PLACEHOLDER — a plain deep teal, not the Memphis
-        // Public Library's brand color. Replace with the Library's value when they send assets.
-        partner: "#2f6f8f",
+        ink: "#1b1f24",
+        muted: "#545d68",
+        line: "#d7dbe0",
+        "line-strong": "#8a939e",
+        canvas: "#f4f5f7",
+        primary: "#1d5a8e",
+        "primary-dark": "#153f63",
+        "primary-tint": "#ebf1f7",
+        success: "#1e6a47",
+        "success-tint": "#ebf4ef",
+        error: "#a3202a",
+        "error-tint": "#fbeeef",
+        // Category text colors (all AA on white and on their tint).
+        "cat-education": "#255a94",
+        "cat-health": "#1e6a47",
+        "cat-food": "#8a4710",
+        "cat-enrichment": "#673d8c",
+        "cat-technology": "#0f5f6d",
+        "cat-identity": "#9a2b58",
+        // Legacy names used by the admin screens.
+        cream: "#f4f5f7",
+        "line-sand": "#d7dbe0",
+        "serve-online": "#1e6a47",
       },
       fontFamily: {
         sans: [
+          "var(--font-sans)",
           "system-ui",
           "-apple-system",
           "Segoe UI",
           "Roboto",
           "sans-serif",
         ],
+      },
+      maxWidth: {
+        page: "46rem",
       },
     },
   },

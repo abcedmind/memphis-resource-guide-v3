@@ -19,9 +19,9 @@ export default function AdminNav({
 }) {
   const pathname = usePathname();
   return (
-    <div className="bg-[#fff5fa] border-b-2 border-[#f0c8de] px-4 py-2.5">
-      <div className="text-[10px] font-extrabold tracking-[0.1em] text-cat-identity mb-2">
-        ADMIN · signed in as {email}
+    <div className="bg-white border-b border-line px-4 py-3">
+      <div className="text-sm font-semibold text-muted mb-2">
+        Admin · signed in as {email}
       </div>
       <nav className="flex gap-1.5 flex-wrap" aria-label="Admin sections">
         {LINKS.map(([href, label]) => {
@@ -31,13 +31,13 @@ export default function AdminNav({
             <Link
               key={href}
               href={href}
-              className={`text-[10px] tracking-[0.06em] px-2.5 py-1 rounded-xl border ${
+              className={`text-sm px-3 py-1.5 rounded-full border ${
                 active
-                  ? "bg-cat-identity border-cat-identity text-white font-bold"
-                  : "border-[#e0a8c4] text-cat-identity"
+                  ? "bg-ink border-ink text-white font-semibold"
+                  : "border-line-strong text-ink"
               }`}
             >
-              {label.toUpperCase()}
+              {label}
               {href === "/admin/submissions" && pendingCount > 0
                 ? ` (${pendingCount})`
                 : ""}

@@ -46,7 +46,6 @@ export default function LoginForm() {
   if (state === "sent")
     return (
       <div className="px-6 py-10 text-center">
-        <div className="text-[40px] mb-2.5" aria-hidden="true">✉</div>
         <h2 className="text-lg text-ink m-0 mb-2">Check your email</h2>
         <p className="text-[13px] text-[#888] leading-relaxed max-w-[360px] mx-auto">
           We sent a magic sign-in link to <b>{email}</b>. Open it on this

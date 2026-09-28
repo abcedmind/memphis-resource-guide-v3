@@ -5,11 +5,16 @@ import { createClient } from "@/lib/supabase/client";
 import { CAT } from "@/lib/constants";
 import { useLang } from "@/lib/i18n";
 import type { CategoryId, ServeType } from "@/lib/types";
+import {
+  btnPrimary,
+  fieldCls,
+  inputCls,
+  labelCls,
+  textareaCls,
+} from "@/components/ui";
 
-const inp =
-  "w-full box-border border border-[#d8d0c4] rounded-md px-2.5 py-[9px] text-[13px] mb-2.5 font-sans bg-white text-ink";
-const lbl =
-  "text-[10px] tracking-[0.05em] text-[#888] block mb-[3px] font-semibold";
+/** The guide's published contact address (also on the About page). */
+const CONTACT_EMAIL = "zandenkelly@gmail.com";
 
 interface FormState {
   name: string;
@@ -34,6 +39,22 @@ const EMPTY: FormState = {
   serve: "navigator",
   submitter: "",
 };
+
+/** The same suggestion as a pre-filled email, for when the form can't reach the database. */
+function mailtoFor(f: FormState) {
+  const body = [
+    `Program: ${f.name}`,
+    `What it is: ${f.desc}`,
+    `How to access it: ${f.how}`,
+    `Website: ${f.url}`,
+    `Category: ${CAT[f.cat]?.label ?? f.cat}`,
+    `Access type: ${f.serve}`,
+    `Ages: ${f.minAge}–${f.maxAge}`,
+    `Suggested by: ${f.submitter}`,
+  ].join("\n");
+  const subject = `Resource guide suggestion: ${f.name}`;
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 export default function SubmitForm() {
   const { t } = useLang();
@@ -76,18 +97,16 @@ export default function SubmitForm() {
 
   if (done)
     return (
-      <div className="px-6 py-10 text-center">
-        <div className="text-[40px] mb-2.5" aria-hidden="true">✓</div>
-        <h2 className="text-lg text-ink m-0 mb-2">{t.suggest.thanksTitle}</h2>
-        <p className="text-[13px] text-[#888] leading-relaxed max-w-[360px] mx-auto mb-[18px]">
-          {t.suggest.thanksBody}
-        </p>
+      <div className="max-w-page mx-auto px-4 pt-10 pb-4">
+        <h1 className="text-3xl font-bold leading-tight text-ink m-0">{t.suggest.thanksTitle}</h1>
+        <p className="text-base leading-relaxed text-ink mt-3 mb-6">{t.suggest.thanksBody}</p>
         <button
+          type="button"
           onClick={() => {
             setDone(false);
             setF(EMPTY);
           }}
-          className="bg-ink text-white rounded-lg px-5 py-2.5 text-[13px]"
+          className={`${btnPrimary} sm:w-auto sm:px-6`}
         >
           {t.suggest.another}
         </button>
@@ -95,58 +114,74 @@ export default function SubmitForm() {
     );
 
   return (
-    <div className="px-4 pt-[18px] pb-10">
-      <div className="bg-[#f0f9f4] border border-[#c8e6d4] rounded-lg px-3.5 py-3 mb-4 text-xs text-[#2a6b48] leading-relaxed">
-        {t.suggest.intro}
+    <div className="max-w-page mx-auto px-4 pt-8 pb-4">
+      <h1 className="text-3xl font-bold leading-tight tracking-[-0.01em] text-ink m-0">
+        {t.suggest.title}
+      </h1>
+      <p className="text-base leading-relaxed text-muted mt-2 mb-8">{t.suggest.intro}</p>
+
+      <div className={fieldCls}>
+        <label className={labelCls} htmlFor="sf-name">{t.suggest.nameLabel}</label>
+        <input id="sf-name" className={inputCls} value={f.name} onChange={(e) => set("name", e.target.value)} placeholder={t.suggest.namePlaceholder} required />
       </div>
-      <label className={lbl} htmlFor="sf-name">{t.suggest.nameLabel}</label>
-      <input id="sf-name" className={inp} value={f.name} onChange={(e) => set("name", e.target.value)} placeholder={t.suggest.namePlaceholder} />
-      <label className={lbl} htmlFor="sf-desc">{t.suggest.descLabel}</label>
-      <textarea id="sf-desc" className={`${inp} min-h-[70px]`} value={f.desc} onChange={(e) => set("desc", e.target.value)} placeholder={t.suggest.descPlaceholder} />
-      <label className={lbl} htmlFor="sf-how">{t.suggest.howLabel}</label>
-      <input id="sf-how" className={inp} value={f.how} onChange={(e) => set("how", e.target.value)} placeholder={t.suggest.howPlaceholder} />
-      <label className={lbl} htmlFor="sf-url">{t.suggest.urlLabel}</label>
-      <input id="sf-url" className={inp} value={f.url} onChange={(e) => set("url", e.target.value)} placeholder="https://…" />
-      <div className="flex gap-2">
-        <div className="flex-1">
-          <label className={lbl} htmlFor="sf-cat">{t.suggest.catLabel}</label>
-          <select id="sf-cat" className={inp} value={f.cat} onChange={(e) => set("cat", e.target.value as CategoryId)}>
+      <div className={fieldCls}>
+        <label className={labelCls} htmlFor="sf-desc">{t.suggest.descLabel}</label>
+        <textarea id="sf-desc" className={textareaCls} value={f.desc} onChange={(e) => set("desc", e.target.value)} placeholder={t.suggest.descPlaceholder} required />
+      </div>
+      <div className={fieldCls}>
+        <label className={labelCls} htmlFor="sf-how">{t.suggest.howLabel}</label>
+        <input id="sf-how" className={inputCls} value={f.how} onChange={(e) => set("how", e.target.value)} placeholder={t.suggest.howPlaceholder} />
+      </div>
+      <div className={fieldCls}>
+        <label className={labelCls} htmlFor="sf-url">{t.suggest.urlLabel}</label>
+        <input id="sf-url" type="url" inputMode="url" className={inputCls} value={f.url} onChange={(e) => set("url", e.target.value)} placeholder="https://…" />
+      </div>
+      <div className="flex gap-3">
+        <div className={`${fieldCls} flex-1 min-w-0`}>
+          <label className={labelCls} htmlFor="sf-cat">{t.suggest.catLabel}</label>
+          <select id="sf-cat" className={inputCls} value={f.cat} onChange={(e) => set("cat", e.target.value as CategoryId)}>
             {(Object.keys(CAT) as CategoryId[]).map((id) => (
               <option key={id} value={id}>{t.cat[id]}</option>
             ))}
           </select>
         </div>
-        <div className="flex-1">
-          <label className={lbl} htmlFor="sf-serve">{t.suggest.serveLabel}</label>
-          <select id="sf-serve" className={inp} value={f.serve} onChange={(e) => set("serve", e.target.value as ServeType)}>
+        <div className={`${fieldCls} flex-1 min-w-0`}>
+          <label className={labelCls} htmlFor="sf-serve">{t.suggest.serveLabel}</label>
+          <select id="sf-serve" className={inputCls} value={f.serve} onChange={(e) => set("serve", e.target.value as ServeType)}>
             <option value="online">{t.serve.online}</option>
             <option value="inperson">{t.serve.inperson}</option>
             <option value="navigator">{t.serve.navigator}</option>
           </select>
         </div>
       </div>
-      <div className="flex gap-2">
-        <div className="flex-1">
-          <label className={lbl} htmlFor="sf-min">{t.suggest.minAge}</label>
-          <input id="sf-min" type="number" className={inp} value={f.minAge} onChange={(e) => set("minAge", e.target.value)} />
+      <div className="flex gap-3">
+        <div className={`${fieldCls} flex-1 min-w-0`}>
+          <label className={labelCls} htmlFor="sf-min">{t.suggest.minAge}</label>
+          <input id="sf-min" type="number" inputMode="numeric" className={inputCls} value={f.minAge} onChange={(e) => set("minAge", e.target.value)} />
         </div>
-        <div className="flex-1">
-          <label className={lbl} htmlFor="sf-max">{t.suggest.maxAge}</label>
-          <input id="sf-max" type="number" className={inp} value={f.maxAge} onChange={(e) => set("maxAge", e.target.value)} />
+        <div className={`${fieldCls} flex-1 min-w-0`}>
+          <label className={labelCls} htmlFor="sf-max">{t.suggest.maxAge}</label>
+          <input id="sf-max" type="number" inputMode="numeric" className={inputCls} value={f.maxAge} onChange={(e) => set("maxAge", e.target.value)} />
         </div>
       </div>
-      <label className={lbl} htmlFor="sf-submitter">{t.suggest.submitterLabel}</label>
-      <input id="sf-submitter" className={inp} value={f.submitter} onChange={(e) => set("submitter", e.target.value)} placeholder={t.suggest.submitterPlaceholder} />
+      <div className={fieldCls}>
+        <label className={labelCls} htmlFor="sf-submitter">{t.suggest.submitterLabel}</label>
+        <input id="sf-submitter" className={inputCls} value={f.submitter} onChange={(e) => set("submitter", e.target.value)} placeholder={t.suggest.submitterPlaceholder} />
+      </div>
       {err && (
-        <div className="text-[11px] text-cat-identity mb-2" role="alert">
-          {err === "required" ? t.suggest.required : t.suggest.error}
+        <div className="mb-4 rounded bg-error-tint px-3 py-2.5 text-[0.9375rem] text-error" role="alert">
+          <p className="m-0">{err === "required" ? t.suggest.required : t.suggest.error}</p>
+          {err === "network" && (
+            <a
+              href={mailtoFor(f)}
+              className="inline-block mt-2 font-semibold text-primary underline underline-offset-2"
+            >
+              {t.suggest.emailInstead}
+            </a>
+          )}
         </div>
       )}
-      <button
-        onClick={submit}
-        disabled={busy}
-        className="w-full bg-ink text-white rounded-lg py-[13px] text-sm font-bold mt-1 disabled:opacity-60"
-      >
+      <button type="button" onClick={submit} disabled={busy} className={btnPrimary}>
         {busy ? t.suggest.submitting : t.suggest.submit}
       </button>
     </div>

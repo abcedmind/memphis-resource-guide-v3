@@ -7,19 +7,19 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div className="px-6 py-16 text-center">
-      <div className="text-[40px] mb-2.5" aria-hidden="true">⚠</div>
-      <h2 className="text-lg font-extrabold text-ink mb-2">
+    <div className="max-w-page mx-auto px-4 pt-12 pb-4">
+      <h1 className="text-3xl font-bold leading-tight text-ink m-0 mb-3">
         Something went wrong
-      </h2>
-      <p className="text-[13px] text-[#888] leading-relaxed max-w-[360px] mx-auto mb-5">
+      </h1>
+      <p className="text-base leading-relaxed text-ink m-0 mb-6">
         Sorry — the guide hit a snag. Your connection may be limited; the
         resources themselves haven&apos;t gone anywhere. You can also always
         dial 2-1-1 for help finding services.
       </p>
       <button
+        type="button"
         onClick={reset}
-        className="bg-ink text-white rounded-lg px-5 py-2.5 text-[13px]"
+        className="inline-flex items-center h-11 px-5 rounded bg-primary text-white text-base font-semibold hover:bg-primary-dark"
       >
         Try again
       </button>

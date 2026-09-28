@@ -2,18 +2,18 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="px-6 py-16 text-center">
-      <div className="text-[40px] mb-2.5" aria-hidden="true">🔎</div>
-      <h2 className="text-lg font-extrabold text-ink mb-2">Page not found</h2>
-      <p className="text-[13px] text-[#888] leading-relaxed max-w-[360px] mx-auto mb-5">
+    <div className="max-w-page mx-auto px-4 pt-12 pb-4">
+      <p className="text-sm font-semibold text-muted m-0">404</p>
+      <h1 className="text-3xl font-bold leading-tight text-ink mt-1 mb-3">Page not found</h1>
+      <p className="text-base leading-relaxed text-ink m-0 mb-6">
         That page doesn&apos;t exist — but every free program for Memphis
         families is one tap away.
       </p>
       <Link
         href="/"
-        className="inline-block bg-ink text-white rounded-lg px-5 py-2.5 text-[13px]"
+        className="inline-flex items-center h-11 px-5 rounded bg-primary text-white text-base font-semibold no-underline hover:bg-primary-dark"
       >
-        ← Back to the guide
+        Back to the guide
       </Link>
     </div>
   );

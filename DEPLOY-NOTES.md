@@ -31,6 +31,10 @@ The secret key never goes on Vercel — it's only used locally for the one-time 
 
 ## How deploys work now
 
-- GitHub repo: https://github.com/abcedmind/memphis-resource-guide-v3 (private)
+- GitHub repo: https://github.com/abcedmind/memphis-resource-guide-v3 (public since 2026-09-16)
 - Vercel project: `alldreamsreal/memphis-resource-guide-v3`
-- To redeploy after changes: `vercel --prod` from this directory.
+- **A push to `main` deploys to production** (Vercel's GitHub integration; other branches get preview URLs). `vercel --prod` from this directory also works where the CLI is installed.
+
+## Status 2026-09-28
+
+The Supabase project (`rigyjvqarqxrutucvgfb`, "Community Resource Guide v2") shows **INACTIVE** (paused) and its hostname does not resolve. Browsing and family plans are unaffected (bundled data). `/suggest` falls back to a pre-filled email to the contact address when the database can't be reached; the navigator opt-in shows its "couldn't save" message. Restoring the project and running the schema above re-enables both.

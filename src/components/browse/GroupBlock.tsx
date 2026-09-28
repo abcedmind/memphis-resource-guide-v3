@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import PixelChar from "@/components/PixelChar";
 import ResourceEditor from "@/components/admin/ResourceEditor";
 import { CAT } from "@/lib/constants";
 import { resourceDistanceMiles, sortByDistance } from "@/lib/geo";
 import { useLang } from "@/lib/i18n";
-import type { Resource, ResourceGroup, ServeType } from "@/lib/types";
+import type { Resource, ResourceGroup } from "@/lib/types";
 
 export interface AdminApi {
   updateResource: (gid: string, rid: string, patch: Partial<Resource>) => void;
@@ -14,11 +13,54 @@ export interface AdminApi {
   addResource: (gid: string, res: Omit<Resource, "id">) => void;
 }
 
-const SERVE_COLOR: Record<ServeType, string> = {
-  online: "#3aab7c",
-  inperson: "#e07c45",
-  navigator: "#9b59b6",
-};
+/** "https://www.example.org/path/" → "example.org/path" — shown as the link text. */
+export function displayUrl(url: string) {
+  return url
+    .replace(/^https?:\/\/(www\.)?/, "")
+    .replace(/\/$/, "");
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      className={`shrink-0 mt-0.5 text-muted transition-transform ${open ? "rotate-180" : ""}`}
+    >
+      <path d="M5 7.5l5 5 5-5" />
+    </svg>
+  );
+}
+
+export function ExternalIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      className="inline-block align-[-2px] ml-1"
+    >
+      <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+    </svg>
+  );
+}
+
+const tag = "inline-flex items-center h-6 px-2 rounded text-[0.8125rem] leading-none whitespace-nowrap";
 
 export default function GroupBlock({
   g,
@@ -27,7 +69,6 @@ export default function GroupBlock({
   setExpanded,
   adminApi,
   userLoc,
-  demo,
 }: {
   g: ResourceGroup;
   matches: (r: Resource) => boolean;
@@ -46,161 +87,148 @@ export default function GroupBlock({
     ? sortByDistance(filtered, userLoc.lat, userLoc.lng)
     : filtered;
   if (visible.length === 0 && !admin) return null;
+  const headingId = `group-${g.id}`;
 
   return (
-    <section aria-label={g.label}>
-      <div
-        className={`flex items-end gap-3.5 px-4 pt-4 pb-2.5 border-t border-[#ddd5c8] ${
-          demo ? "bg-band-demo" : "bg-band-sand"
-        }`}
-        style={{ borderBottom: `3px solid ${g.color}` }}
-      >
-        {g.charStage !== null && (
-          <div className="shrink-0 pb-0.5">
-            <PixelChar stageIndex={g.charStage} ps={5} />
-          </div>
-        )}
-        <div className="flex-1 pb-[3px]">
-          <h2
-            className="text-[11px] font-extrabold tracking-[0.12em]"
-            style={{ color: g.color }}
-          >
-            {g.label}
-          </h2>
-          {g.note && (
-            <div className="text-[10px] text-[#998] mt-[3px] leading-normal italic">
-              {g.note}
-            </div>
-          )}
-          <div className="text-[10px] text-[#aaa] mt-[3px]">
-            {visible.length}{" "}
-            {visible.length === 1 ? t.browse.program : t.browse.programs}
-          </div>
-        </div>
+    <section aria-labelledby={headingId} className="pt-8">
+      <div className="flex items-baseline justify-between gap-4 border-b-2 border-ink pb-2">
+        <h2
+          id={headingId}
+          className="text-[0.9375rem] font-bold tracking-[0.04em] text-ink m-0"
+        >
+          {g.label}
+        </h2>
+        <span className="text-sm text-muted whitespace-nowrap">
+          {visible.length}{" "}
+          {visible.length === 1 ? t.browse.program : t.browse.programs}
+        </span>
       </div>
+      {g.note && (
+        <p className="text-[0.9375rem] leading-relaxed text-muted mt-2 mb-0">{g.note}</p>
+      )}
 
-      <div className="px-3 py-2 bg-cream">
+      <ul className="list-none p-0 m-0 mt-3 flex flex-col gap-2">
         {visible.map((res) => {
           const key = `${g.id}-${res.id}`;
           const open = expanded === key;
-          const col = CAT[res.cat]?.color || "#777";
+          const cat = CAT[res.cat];
+          const panelId = `panel-${key}`;
           const dist = userLoc
             ? resourceDistanceMiles(res, userLoc.lat, userLoc.lng)
             : null;
           if (admin && editing === res.id)
             return (
-              <ResourceEditor
-                key={key}
-                res={res}
-                color={col}
-                onSave={(p) => {
-                  adminApi!.updateResource(g.id, res.id, p);
-                  setEditing(null);
-                }}
-                onCancel={() => setEditing(null)}
-              />
+              <li key={key}>
+                <ResourceEditor
+                  res={res}
+                  color={cat?.color || "#545d68"}
+                  onSave={(p) => {
+                    adminApi!.updateResource(g.id, res.id, p);
+                    setEditing(null);
+                  }}
+                  onCancel={() => setEditing(null)}
+                />
+              </li>
             );
           return (
-            <article
+            <li
               key={key}
-              className="bg-white rounded-md mb-1.5 border border-line-sand overflow-hidden"
-              style={{ borderLeft: `4px solid ${col}` }}
+              className={`bg-white rounded-md border ${open ? "border-line-strong" : "border-line"}`}
             >
               <button
-                className="w-full text-left flex items-center px-3 py-2.5 gap-2.5"
+                type="button"
+                className="w-full text-left flex items-start gap-3 px-4 py-3.5"
                 onClick={() => setExpanded(open ? null : key)}
                 aria-expanded={open}
+                aria-controls={panelId}
               >
                 <span className="flex-1 min-w-0">
-                  <span className="block text-[13px] font-semibold text-ink">
+                  <span className="block text-base font-semibold leading-snug text-ink">
                     {res.name}
                   </span>
                   {!open && (
-                    <span className="block text-[11px] text-[#aaa] mt-0.5 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {res.desc.slice(0, 72)}…
+                    <span className="text-[0.9375rem] leading-normal text-muted mt-1 line-clamp-2">
+                      {res.desc}
                     </span>
                   )}
-                </span>
-                {dist !== null && (
-                  <span className="text-[7px] tracking-[0.04em] px-1 py-0.5 rounded-[3px] shrink-0 whitespace-nowrap border border-[#1a1a2e33] text-ink font-bold">
-                    {dist < 10 ? dist.toFixed(1) : Math.round(dist)}{" "}
-                    {t.browse.miAway}
+                  <span className="flex flex-wrap gap-1.5 mt-2.5">
+                    {cat && (
+                      <span
+                        className={tag}
+                        style={{ color: cat.color, background: cat.tint }}
+                      >
+                        {t.cat[res.cat] ?? cat.label}
+                      </span>
+                    )}
+                    {res.serve && (
+                      <span className={`${tag} border border-line text-muted`}>
+                        {t.serve[res.serve]}
+                      </span>
+                    )}
+                    {dist !== null && (
+                      <span className={`${tag} border border-line text-ink font-semibold`}>
+                        {dist < 10 ? dist.toFixed(1) : Math.round(dist)} {t.browse.miAway}
+                      </span>
+                    )}
                   </span>
-                )}
-                {res.serve && (
-                  <span
-                    className="text-[7px] tracking-[0.04em] px-1 py-0.5 rounded-[3px] shrink-0 whitespace-nowrap border"
-                    style={{
-                      color: SERVE_COLOR[res.serve],
-                      borderColor: `${SERVE_COLOR[res.serve]}55`,
-                    }}
-                  >
-                    {t.serve[res.serve].toUpperCase()}
-                  </span>
-                )}
-                <span
-                  className="text-[8px] tracking-[0.05em] px-1.5 py-0.5 rounded-[3px] shrink-0 border"
-                  style={{ color: col, borderColor: `${col}44` }}
-                >
-                  {t.cat[res.cat] ?? CAT[res.cat]?.label}
                 </span>
+                <Chevron open={open} />
               </button>
               {open && (
-                <div className="px-3 pb-3 border-t border-[#f0ece4]">
-                  <p className="text-xs text-[#444] mt-2 mb-1.5 leading-[1.65]">
-                    {res.desc}
-                  </p>
-                  <div className="text-[11px] text-[#666] px-2 py-1.5 bg-[#f5f1eb] rounded mb-[7px] leading-normal">
-                    <b>{t.browse.howToAccess}</b>
-                    {res.how}
+                <div id={panelId} className="px-4 pb-4">
+                  <p className="text-base leading-relaxed text-ink m-0">{res.desc}</p>
+                  <div className="mt-3 rounded bg-canvas px-3 py-2.5">
+                    <p className="text-sm font-semibold text-ink m-0">{t.browse.howToAccess}</p>
+                    <p className="text-[0.9375rem] leading-normal text-ink mt-0.5 mb-0">{res.how}</p>
                   </div>
                   {res.url && (
                     <a
                       href={res.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] no-underline"
-                      style={{ color: col }}
+                      className="inline-block mt-3 text-[0.9375rem] font-semibold text-primary underline underline-offset-2 break-all"
                     >
-                      ↗{" "}
-                      {res.url
-                        .replace("https://www.", "")
-                        .replace("https://", "")}
+                      {displayUrl(res.url)}
+                      <ExternalIcon />
                     </a>
                   )}
                   {admin && (
-                    <div className="mt-2">
+                    <div className="mt-3 flex gap-2">
                       <button
+                        type="button"
                         onClick={() => setEditing(res.id)}
-                        className="bg-cat-education text-white rounded px-2.5 py-1 text-[10px] mr-1.5"
+                        className="bg-primary text-white rounded px-3 py-1.5 text-sm font-semibold"
                       >
-                        EDIT
+                        Edit
                       </button>
                       <button
+                        type="button"
                         onClick={() => {
                           if (confirmId === res.id) {
                             adminApi!.deleteResource(g.id, res.id);
                             setConfirmId(null);
                           } else setConfirmId(res.id);
                         }}
-                        className={`rounded px-2.5 py-1 text-[10px] border border-[#e0a8c4] ${
+                        className={`rounded px-3 py-1.5 text-sm font-semibold border border-error ${
                           confirmId === res.id
-                            ? "bg-cat-identity text-white"
-                            : "bg-transparent text-cat-identity"
+                            ? "bg-error text-white"
+                            : "bg-white text-error"
                         }`}
                       >
-                        {confirmId === res.id ? "TAP AGAIN TO DELETE" : "DELETE"}
+                        {confirmId === res.id ? "Tap again to delete" : "Delete"}
                       </button>
                     </div>
                   )}
                 </div>
               )}
-            </article>
+            </li>
           );
         })}
+      </ul>
 
-        {admin &&
-          (editing === "new" ? (
+      {admin &&
+        (editing === "new" ? (
+          <div className="mt-2">
             <ResourceEditor
               isNew
               res={{
@@ -215,7 +243,7 @@ export default function GroupBlock({
                 flags: [],
                 serve: "navigator",
               }}
-              color="#3aab7c"
+              color="#1e6a47"
               onSave={(p) => {
                 adminApi!.addResource(g.id, {
                   name: p.name ?? "",
@@ -232,15 +260,16 @@ export default function GroupBlock({
               }}
               onCancel={() => setEditing(null)}
             />
-          ) : (
-            <button
-              onClick={() => setEditing("new")}
-              className="w-full bg-transparent border-[1.5px] border-dashed border-[#c4bbae] rounded-md py-[9px] text-[11px] text-[#998] mt-0.5"
-            >
-              + Add resource to {g.label}
-            </button>
-          ))}
-      </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setEditing("new")}
+            className="w-full mt-2 bg-white border border-dashed border-line-strong rounded-md py-2.5 text-sm text-muted"
+          >
+            + Add resource to {g.label}
+          </button>
+        ))}
     </section>
   );
 }

@@ -86,10 +86,10 @@ export default function FamiliesTable({
       {regs.length > 0 && (
         <div className="mb-3 flex gap-1.5">
           <button onClick={exportCsv} className="bg-cat-education text-white rounded px-2.5 py-1 text-[10px]">
-            ⬇ EXPORT CSV
+            Export CSV
           </button>
           <button onClick={exportJson} className="bg-cat-education text-white rounded px-2.5 py-1 text-[10px]">
-            ⬇ EXPORT JSON
+            Export JSON
           </button>
         </div>
       )}

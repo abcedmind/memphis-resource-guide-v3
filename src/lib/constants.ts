@@ -1,62 +1,20 @@
 import type { CategoryId, ServeType } from "./types";
 
-export const CAT: Record<CategoryId, { label: string; color: string }> = {
-  education: { label: "EDUCATION", color: "#4a7fcf" },
-  health: { label: "HEALTH", color: "#3aab7c" },
-  food: { label: "FOOD", color: "#e07c45" },
-  enrichment: { label: "ENRICHMENT", color: "#9b59b6" },
-  technology: { label: "TECHNOLOGY", color: "#2980b9" },
-  identity: { label: "IDENTITY & ADVOCACY", color: "#c0397b" },
+/**
+ * Category colors are text colors, shown on a light tint of themselves.
+ * They match the `cat-*` tokens in tailwind.config.ts and all pass WCAG AA.
+ */
+export const CAT: Record<CategoryId, { label: string; color: string; tint: string }> = {
+  education: { label: "Education", color: "#255a94", tint: "#ebf0f5" },
+  health: { label: "Health", color: "#1e6a47", tint: "#ebf2ee" },
+  food: { label: "Food", color: "#8a4710", tint: "#f4eee9" },
+  enrichment: { label: "Enrichment", color: "#673d8c", tint: "#f1eef5" },
+  technology: { label: "Technology", color: "#0f5f6d", tint: "#e9f1f2" },
+  identity: { label: "Identity & advocacy", color: "#9a2b58", tint: "#f6ecf0" },
 };
 
-export const SERVE_BADGE: Record<ServeType, { label: string; color: string }> =
-  {
-    online: { label: "Self-serve online", color: "#3aab7c" },
-    inperson: { label: "In person", color: "#e07c45" },
-    navigator: { label: "Navigator helps", color: "#9b59b6" },
-  };
-
-// ════════════════════════════════════════════════════════════
-//  PIXEL ART CHARACTERS (8px wide, pixel size 5px) — 5 growth
-//  stages, a signature element of the guide. Preserved from v2.
-// ════════════════════════════════════════════════════════════
-export const CHARS: { colors: Record<string, string>; rows: string[] }[] = [
-  {
-    colors: { H: "#8B4513", S: "#f5c5a3", C: "#89CFF0", L: "#b8e0f5" },
-    rows: [
-      "..HHHH..", ".SSSSSS.", ".SSSSSS.", ".SSSSSS.",
-      "..CCCC..", "..CCCC..", "..LLLL..", "..LLLL..",
-    ],
-  },
-  {
-    colors: { H: "#5c3317", S: "#f5c5a3", C: "#FFB347", L: "#4466DD" },
-    rows: [
-      "..HHHH..", ".SSSSSS.", ".SSSSSS.", ".SSSSSS.", "...SS...",
-      "..CCCC..", "..CCCC..", "..CCCC..", "..LLLL..", "..LLLL..", "..LLLL..",
-    ],
-  },
-  {
-    colors: { H: "#333", S: "#f5c5a3", C: "#5cb85c", L: "#2244BB" },
-    rows: [
-      "..HHHH..", ".SSSSSS.", ".SSSSSS.", ".SSSSSS.", "...SS...",
-      ".CCCCCC.", ".CCCCCC.", ".CCCCCC.", ".CCCCCC.",
-      "..LLLL..", "..LL.LL.", "..LL.LL.", "..LL.LL.",
-    ],
-  },
-  {
-    colors: { H: "#222", S: "#f5c5a3", C: "#CC6677", L: "#222" },
-    rows: [
-      ".HSSSSH.", ".SSSSSS.", ".SSSSSS.", ".SSSSSS.", "...SS...",
-      ".CCCCCC.", ".CCCCCC.", ".CCCCCC.", ".CCCCCC.", ".CCCCCC.",
-      "..LLLL..", "..LL.LL.", "..LL.LL.", "..LL.LL.", "..LL.LL.",
-    ],
-  },
-  {
-    colors: { H: "#111", S: "#f5c5a3", C: "#9999CC", L: "#222", G: "#FFD700" },
-    rows: [
-      "..GGGG..", "GGGGGGGG", "..HHHH..", ".SSSSSS.", ".SSSSSS.", ".SSSSSS.",
-      "...SS...", ".CCCCCC.", ".CCCCCC.", ".CCCCCC.", ".CCCCCC.", ".CCCCCC.",
-      "..LLLL..", "..LL.LL.", "..LL.LL.", "..LL.LL.", "..LL.LL.",
-    ],
-  },
-];
+export const SERVE_BADGE: Record<ServeType, { label: string }> = {
+  online: { label: "Self-serve online" },
+  inperson: { label: "In person" },
+  navigator: { label: "Navigator helps" },
+};

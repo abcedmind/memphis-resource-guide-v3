@@ -10,33 +10,33 @@ export default function GlobalError({
     <html lang="en">
       <body
         style={{
-          background: "#faf7f2",
-          fontFamily: "system-ui, sans-serif",
+          background: "#f4f5f7",
+          color: "#1b1f24",
+          fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
           minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "24px",
+          margin: 0,
+          padding: "48px 16px",
         }}
       >
-        <div>
-          <h2 style={{ color: "#1a1a2e", fontSize: 18 }}>
+        <div style={{ maxWidth: 736, margin: "0 auto" }}>
+          <h1 style={{ fontSize: 30, lineHeight: 1.2, margin: "0 0 12px" }}>
             Something went wrong
-          </h2>
-          <p style={{ color: "#888", fontSize: 13, margin: "8px 0 20px" }}>
+          </h1>
+          <p style={{ fontSize: 16, lineHeight: 1.6, margin: "0 0 24px" }}>
             The guide hit a snag. Dial 2-1-1 anytime for help finding
             services.
           </p>
           <button
             onClick={reset}
             style={{
-              background: "#1a1a2e",
+              background: "#1d5a8e",
               color: "#fff",
               border: "none",
-              borderRadius: 8,
-              padding: "10px 20px",
-              fontSize: 13,
+              borderRadius: 4,
+              height: 44,
+              padding: "0 20px",
+              fontSize: 16,
+              fontWeight: 600,
               cursor: "pointer",
             }}
           >

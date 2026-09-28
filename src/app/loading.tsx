@@ -1,6 +1,9 @@
 export default function Loading() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center text-[13px] text-[#8888bb]">
+    <div
+      className="max-w-page mx-auto px-4 pt-12 text-base text-muted"
+      role="status"
+    >
       Loading resources…
     </div>
   );

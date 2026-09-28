@@ -6,7 +6,7 @@ A community tool for Memphis, TN families — especially in underserved ZIP code
 
 - **Español** — a language toggle in the header switches all UI chrome to Spanish (labels, forms, the consent text, plan view). Resource names/descriptions stay in English by design; they're data, and translating program details wrong is worse than not translating them. Dictionary lives in `src/lib/i18n.tsx`.
 - **PDF export of the family plan** — the "Download as PDF / Print" button renders a print-optimized document (letterhead with generation date, visible URLs, page-break-safe program cards, interactive chrome stripped). Uses the browser's print-to-PDF rather than a PDF library: zero added bundle weight for users on limited data plans.
-- **📍 Near me** — a filter chip that (with permission) sorts each group's programs by distance and shows mileage chips. Only resources with a real front door get distances (coordinates in `src/lib/geo.ts`); online/countywide programs keep their order — a distance number on a phone line would be misleading. Location is used in-page only, never stored or sent anywhere.
+- **Near me** — a filter chip that (with permission) sorts each group's programs by distance and shows mileage chips. Only resources with a real front door get distances (coordinates in `src/lib/geo.ts`); online/countywide programs keep their order — a distance number on a phone line would be misleading. Location is used in-page only, never stored or sent anywhere.
 - **Admin dashboard** — `/admin` now shows pending/approved/rejected counts, families saved, 8-week submission and registration trend charts (inline SVG, no chart library), and resources per category.
 
 ## Run locally
@@ -39,17 +39,16 @@ Admin access uses **email magic links** — no passwords, no shared codes.
 
 > Security model: anyone can *request* a magic link, but only emails that exist as Supabase Auth users receive a working sign-in. All write access to resources/submissions and read access to family registrations is enforced by RLS at the database — not by UI checks.
 
-## Library edition (2026-09-07)
+## Design (2026-09-28)
 
-The site carries a partner line for the Memphis Public Library, controlled by `NEXT_PUBLIC_PARTNER` (`src/lib/partner.ts`):
+One restrained civic design system, defined as tokens in `tailwind.config.ts`:
 
-| Value | Header / footer say | When |
-|---|---|---|
-| unset or `mpl-proposed` (default) | "Designed for the Memphis Public Library" | now — a statement about the design, not an agreement |
-| `mpl` | "A Memphis Public Library resource" | **only after the Library agrees in writing** |
-| `off` | nothing | if the Library declines |
+- **Type:** Public Sans (open-source, drawn for public-service sites), self-hosted by `next/font`. Body text is 16px; inputs are 16px so phones don't zoom on focus.
+- **Color:** near-black ink, one blue (`primary`) for actions and links, neutral greys for structure. Every text color is at least 4.5:1 against its background (WCAG AA). Category colors are text on a light tint of themselves, never fills.
+- **Components:** shared form and button classes in `src/components/ui.ts`; one visible focus ring (`globals.css`); no gradients, shadows, emoji or pixel art.
+- **Mobile first:** a single 46rem column, 16px side gutters, tab and filter rows that scroll sideways on phones instead of wrapping.
 
-Also in partner mode: a "Start here: a library card" callout at the top of Browse (facts from the guide's own Library entries), a partner line in the footer and the page description, and the `/about` page, which states plainly who makes the guide, how the list is checked, and that the Library has not adopted it until the wording changes. The logo slot in the header renders only if `public/partner/mpl-logo.svg` exists — the Library's own file. The `partner` color in `tailwind.config.ts` is a placeholder, not the Library's brand.
+The Memphis Public Library edition (partner mode, "Designed for the Memphis Public Library" line, library-card callout, Library-styled theme) was removed on 2026-09-28. It lives in git history (`25baad7`, and the `mpl-design` branch) if the Library ever agrees to a partnership. The Library's own programs stay in the guide as ordinary entries.
 
 ## Deploy to Vercel
 

@@ -5,8 +5,8 @@
  * Family plans and admin actions require a connection; resource browsing
  * keeps working on a spotty signal once the guide has loaded once.
  */
-const CACHE = "mfrg-v3-2";
-const PRECACHE = ["/", "/family", "/suggest"];
+const CACHE = "mfrg-v3-3"; // bumped 2026-09-28: new design, old cached pages dropped
+const PRECACHE = ["/", "/family", "/suggest", "/about"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

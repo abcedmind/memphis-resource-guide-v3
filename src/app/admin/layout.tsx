@@ -19,7 +19,12 @@ export default async function AdminLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) return <LoginForm />;
+  if (!user)
+    return (
+      <div className="max-w-page mx-auto">
+        <LoginForm />
+      </div>
+    );
 
   const { count } = await supabase
     .from("submissions")
@@ -27,7 +32,7 @@ export default async function AdminLayout({
     .eq("status", "pending");
 
   return (
-    <div>
+    <div className="max-w-page mx-auto">
       <AdminNav pendingCount={count ?? 0} email={user.email ?? "admin"} />
       {children}
     </div>
