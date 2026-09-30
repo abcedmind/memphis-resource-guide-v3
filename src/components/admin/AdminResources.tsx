@@ -106,7 +106,7 @@ export default function AdminResources({
     <div>
       {error && (
         <div
-          className="bg-[#fff0f0] border-b border-[#e0a0a0] px-4 py-2 text-[11px] text-cat-identity"
+          className="bg-signal-tint border-b border-signal px-4 py-2 text-[11px] text-signal"
           role="alert"
         >
           {error}{" "}

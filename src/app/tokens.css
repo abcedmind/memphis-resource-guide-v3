@@ -1,0 +1,35 @@
+/* Design tokens: the only copy of the site's colours, face and spacing.
+   Three colours: ink, paper, accent. Every other colour is a mix of those
+   three, written out as hex so older phone browsers render it (no color-mix).
+   One named exception: --signal, for errors and delete, nothing else.
+   Contrast (WCAG): ink 16.6:1 on paper; muted 6.8:1 on canvas; accent 6.4:1
+   on accent-tint; white on accent 7.2:1; line-strong 3.4:1 (input borders).
+   `npm run lint:tokens` fails any raw hex written outside this file. */
+:root {
+  /* The three colours */
+  --ink: #1b1f24;          /* text, headings */
+  --paper: #ffffff;        /* cards, header, inputs */
+  --accent: #1d5a8e;       /* links, buttons, focus, the one "yes" state */
+
+  /* Mixes of the three (percent = share of the first colour) */
+  --canvas: #f4f4f4;       /* ink 5% into paper: page ground */
+  --line: #d8d9da;         /* ink 17%: hairlines, card borders */
+  --line-strong: #888b8d;  /* ink 52%: input borders */
+  --muted: #525559;        /* ink 76%: secondary text */
+  --accent-dark: #1c4569;  /* accent 65%, ink 35%: button hover */
+  --accent-tint: #edf2f6;  /* accent 8% into paper: selected, success */
+
+  /* The one exception: errors and destructive buttons only */
+  --signal: #a3202a;
+  --signal-tint: #f9eff0;
+
+  /* One face: Public Sans, self-hosted by next/font (layout.tsx) */
+  --face: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Space: one 4px-based scale (Tailwind's 1/2/3/4/6/8/12 steps match it) */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px;
+  --gutter: 16px;          /* phone side margin, every page */
+  --col: 46rem;            /* the single reading column */
+  --radius: 4px;           /* one corner radius; 6px on cards */
+}

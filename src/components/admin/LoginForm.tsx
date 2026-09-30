@@ -11,7 +11,7 @@ function CallbackError() {
   if (!msg) return null;
   return (
     <div
-      className="text-[11px] text-cat-identity bg-[#fff0f0] border border-[#e0a0a0] rounded-md px-3 py-2 mb-3 leading-relaxed"
+      className="text-[11px] text-signal bg-signal-tint border border-signal rounded-md px-3 py-2 mb-3 leading-relaxed"
       role="alert"
     >
       {msg}
@@ -51,7 +51,7 @@ export default function LoginForm() {
     return (
       <div className="px-6 py-10 text-center">
         <h2 className="text-lg text-ink m-0 mb-2">Check your email</h2>
-        <p className="text-[13px] text-[#888] leading-relaxed max-w-[360px] mx-auto">
+        <p className="text-[13px] text-muted leading-relaxed max-w-[360px] mx-auto">
           We sent a magic sign-in link to <b>{email}</b>. Open it on this
           device to enter the admin panel.
         </p>
@@ -61,7 +61,7 @@ export default function LoginForm() {
   return (
     <div className="px-4 pt-[18px] pb-10 max-w-[400px] mx-auto">
       <h2 className="text-lg font-extrabold text-ink mb-1">Admin sign-in</h2>
-      <p className="text-xs text-[#888] mb-4 leading-relaxed">
+      <p className="text-xs text-muted mb-4 leading-relaxed">
         Admin access uses email magic links — no passwords. Only accounts
         created in the Supabase Auth dashboard can manage the guide.
       </p>
@@ -69,7 +69,7 @@ export default function LoginForm() {
         <CallbackError />
       </Suspense>
       <label
-        className="text-[10px] tracking-[0.05em] text-[#888] block mb-[3px] font-semibold"
+        className="text-[10px] tracking-[0.05em] text-muted block mb-[3px] font-semibold"
         htmlFor="login-email"
       >
         ADMIN EMAIL
@@ -78,14 +78,14 @@ export default function LoginForm() {
         id="login-email"
         type="email"
         autoComplete="email"
-        className="w-full box-border border border-[#d8d0c4] rounded-md px-2.5 py-[9px] text-[13px] mb-2.5 bg-white text-ink"
+        className="w-full box-border border border-line-strong rounded-md px-2.5 py-[9px] text-[13px] mb-2.5 bg-paper text-ink"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && sendLink()}
         placeholder="you@example.org"
       />
       {state === "error" && (
-        <div className="text-[11px] text-cat-identity mb-2" role="alert">
+        <div className="text-[11px] text-signal mb-2" role="alert">
           {errMsg}
         </div>
       )}

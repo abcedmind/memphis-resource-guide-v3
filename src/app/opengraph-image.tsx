@@ -22,7 +22,7 @@ export default function OgImage() {
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ color: "#545d68", fontSize: 30, marginBottom: 20 }}>
+        <div style={{ color: "#525559", fontSize: 30, marginBottom: 20 }}>
           Shelby County, Tennessee
         </div>
         <div
@@ -38,7 +38,7 @@ export default function OgImage() {
         >
           Memphis Family Resource Guide
         </div>
-        <div style={{ color: "#545d68", fontSize: 36 }}>
+        <div style={{ color: "#525559", fontSize: 36 }}>
           Free programs for children &amp; families · Ages 0–18
         </div>
       </div>

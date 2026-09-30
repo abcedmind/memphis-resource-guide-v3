@@ -49,16 +49,16 @@ Admin access uses **email magic links** — no passwords, no shared codes.
 
 > Security model: the login form asks Supabase for a magic link with `shouldCreateUser: false`, and the RLS policies admit only emails listed in the `admin_emails` table (`supabase/schema.sql`). Also turn off **Authentication → Sign In / Providers (older dashboards: Authentication → Settings) → "Allow new users to sign up"**: Supabase's default is to create an account for any email that asks, and before 2026-09-28 the policies treated every signed-in account as an admin. All write access to resources/submissions and read access to family registrations is enforced by RLS at the database — not by UI checks.
 
-## Design (2026-09-28)
+## Design (2026-09-30)
 
-One restrained civic design system, defined as tokens in `tailwind.config.ts`:
+One simple design language, kept in one file: [`src/app/tokens.css`](src/app/tokens.css). Tailwind reads it (`tailwind.config.ts` holds no colour values), so changing a token changes every page.
 
-- **Type:** Public Sans (open-source, drawn for public-service sites), self-hosted by `next/font`. Body text is 16px; inputs are 16px so phones don't zoom on focus.
-- **Color:** near-black ink, one blue (`primary`) for actions and links, neutral greys for structure. Every text color is at least 4.5:1 against its background (WCAG AA). Category colors are text on a light tint of themselves, never fills.
-- **Components:** shared form and button classes in `src/components/ui.ts`; one visible focus ring (`globals.css`); no gradients, shadows, emoji or pixel art.
-- **Mobile first:** a single 46rem column, 16px side gutters, tab and filter rows that scroll sideways on phones instead of wrapping.
-
-The Memphis Public Library edition (partner mode, "Designed for the Memphis Public Library" line, library-card callout, Library-styled theme) was removed on 2026-09-28. It lives in git history (`25baad7`, and the `mpl-design` branch) if the Library ever agrees to a partnership. The Library's own programs stay in the guide as ordinary entries.
+- **Three colours:** ink (text), paper (cards, header, inputs), accent blue (links, buttons, focus, the "yes" states). Greys and tints are mixes of those three, written out as hex. One named exception, `signal` red, is for errors and delete buttons only. Category tags carry no colour of their own; the label does the work. Every text colour is at least 4.5:1 on its background (WCAG AA; ratios in the file header).
+- **One face:** Public Sans (open-source, drawn for public-service sites), self-hosted by `next/font`. Body text and inputs are 16px so phones don't zoom on focus.
+- **One spacing scale:** 4px steps (`--s1` … `--s7`), a 16px phone gutter, one 46rem reading column.
+- **Check:** `npm run lint:tokens` fails any raw hex colour written outside `tokens.css`. The OG image, the global error page, the favicon and the browser theme colour can't read CSS variables, so they may use a hex only if it is a `tokens.css` value.
+- Shared form and button classes: `src/components/ui.ts`. No gradients, shadows, emoji or pixel art.
+- The site carries no partner or library branding (removed 2026-09-28). Memphis Public Library programs appear as listings like any other provider, and the About page names the library's public pages as one source of information.
 
 ## Deploy to Vercel
 

@@ -5,8 +5,8 @@ import { CAT } from "@/lib/constants";
 import type { CategoryId, Resource, ServeType } from "@/lib/types";
 
 const inp =
-  "w-full box-border border border-[#d8d0c4] rounded px-2 py-1.5 text-xs mb-1.5 font-sans bg-white text-ink";
-const lbl = "text-[9px] tracking-[0.06em] text-[#998] block mb-0.5";
+  "w-full box-border border border-line-strong rounded px-2 py-1.5 text-xs mb-1.5 font-sans bg-paper text-ink";
+const lbl = "text-[9px] tracking-[0.06em] text-muted block mb-0.5";
 
 export default function ResourceEditor({
   res,
@@ -28,7 +28,7 @@ export default function ResourceEditor({
 
   return (
     <div
-      className="bg-white rounded-md mb-1.5 p-3"
+      className="bg-paper rounded-md mb-1.5 p-3"
       style={{ border: `2px solid ${color}` }}
     >
       <label className={lbl} htmlFor={`re-name-${res.id}`}>NAME</label>
@@ -68,7 +68,7 @@ export default function ResourceEditor({
         </div>
       </div>
       {err && (
-        <div className="text-[10px] text-cat-identity mb-1.5" role="alert">
+        <div className="text-[10px] text-signal mb-1.5" role="alert">
           Name is required.
         </div>
       )}
@@ -87,7 +87,7 @@ export default function ResourceEditor({
       </button>
       <button
         onClick={onCancel}
-        className="bg-transparent text-[#999] border border-[#ccc] rounded px-3.5 py-1.5 text-[11px]"
+        className="bg-transparent text-muted border border-line-strong rounded px-3.5 py-1.5 text-[11px]"
       >
         CANCEL
       </button>

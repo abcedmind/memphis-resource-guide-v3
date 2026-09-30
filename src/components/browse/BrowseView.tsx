@@ -142,7 +142,7 @@ export default function BrowseView({
       )}
 
       {/* Filter bar */}
-      <div className="sticky top-0 z-10 bg-white border-y border-line print:hidden">
+      <div className="sticky top-0 z-10 bg-paper border-y border-line print:hidden">
         <div
           className="scroll-row max-w-page mx-auto px-4 py-2.5 flex gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible"
           role="group"
@@ -159,7 +159,7 @@ export default function BrowseView({
                 className={`${chip} ${
                   on
                     ? "bg-ink border-ink text-white font-semibold"
-                    : "bg-white border-line-strong text-ink hover:bg-canvas"
+                    : "bg-paper border-line-strong text-ink hover:bg-canvas"
                 }`}
               >
                 {c.label}
@@ -174,7 +174,7 @@ export default function BrowseView({
             className={`${chip} ${
               nearOn
                 ? "bg-primary border-primary text-white font-semibold"
-                : "bg-white border-line-strong text-primary hover:bg-primary-tint"
+                : "bg-paper border-line-strong text-primary hover:bg-primary-tint"
             }`}
           >
             <PinIcon />
@@ -191,7 +191,7 @@ export default function BrowseView({
         <div className="max-w-page mx-auto px-4 pt-3">
           <p
             role="status"
-            className="text-sm text-ink bg-white border border-line rounded px-3 py-2 m-0"
+            className="text-sm text-ink bg-paper border border-line rounded px-3 py-2 m-0"
           >
             {geo.status === "denied"
               ? t.browse.nearMeDenied

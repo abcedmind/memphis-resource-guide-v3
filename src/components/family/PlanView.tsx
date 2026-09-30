@@ -13,11 +13,11 @@ function Prog({ r }: { r: FlatResource }) {
   const { t } = useLang();
   const cat = CAT[r.cat];
   return (
-    <li className="bg-white border border-line rounded-md px-4 py-3.5 print:break-inside-avoid print:border-0 print:border-b print:rounded-none print:px-0">
+    <li className="bg-paper border border-line rounded-md px-4 py-3.5 print:break-inside-avoid print:border-0 print:border-b print:rounded-none print:px-0">
       <p className="text-base font-semibold leading-snug text-ink m-0">{r.name}</p>
       <div className="flex flex-wrap gap-1.5 mt-2 print:hidden">
         {cat && (
-          <span className={tag} style={{ color: cat.color, background: cat.tint }}>
+          <span className={`${tag} bg-canvas text-ink`}>
             {t.cat[r.cat] ?? cat.label}
           </span>
         )}
@@ -163,7 +163,7 @@ export default function PlanView({
 
       {/* ── Cowork block (interactive only — pointless on paper) ── */}
       {coworkReady.length > 0 && (
-        <section className="mt-10 rounded-md border border-line bg-white p-4 print:hidden">
+        <section className="mt-10 rounded-md border border-line bg-paper p-4 print:hidden">
           <h2 className="text-lg font-bold text-ink m-0">
             {t.plan.coworkReady} · {coworkReady.length}{" "}
             {coworkReady.length === 1 ? t.browse.program : t.browse.programs}
@@ -175,7 +175,7 @@ export default function PlanView({
           <button
             type="button"
             onClick={exportCowork}
-            className="inline-flex items-center justify-center w-full h-11 rounded border border-primary bg-white text-primary text-base font-semibold hover:bg-primary-tint"
+            className="inline-flex items-center justify-center w-full h-11 rounded border border-primary bg-paper text-primary text-base font-semibold hover:bg-primary-tint"
           >
             {t.plan.exportButton}
           </button>

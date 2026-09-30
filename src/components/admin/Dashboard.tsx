@@ -44,8 +44,8 @@ function WeeklyBars({
   const barW = (W - gap * (n - 1)) / n;
 
   return (
-    <figure className="bg-white border border-line-sand rounded-lg p-3 m-0">
-      <figcaption className="text-[10px] font-extrabold tracking-[0.08em] text-[#888] mb-2">
+    <figure className="bg-paper border border-line rounded-lg p-3 m-0">
+      <figcaption className="text-[10px] font-extrabold tracking-[0.08em] text-muted mb-2">
         {title.toUpperCase()}
       </figcaption>
       <svg
@@ -63,7 +63,7 @@ function WeeklyBars({
           y1={H - PAD_BOTTOM}
           x2={W}
           y2={H - PAD_BOTTOM}
-          stroke="#e8e2da"
+          className="stroke-line"
           strokeWidth={1}
         />
         {data.map((d, i) => {
@@ -81,7 +81,7 @@ function WeeklyBars({
                   cx={x + barW / 2}
                   cy={H - PAD_BOTTOM - 2}
                   r={1.5}
-                  fill="#d8d0c4"
+                  className="fill-line-strong"
                 />
               ) : (
                 <rect
@@ -90,7 +90,7 @@ function WeeklyBars({
                   width={barW}
                   height={h}
                   rx={3}
-                  fill="#1a1a2e"
+                  className="fill-ink"
                 >
                   <title>{`${d.label}: ${d.count}`}</title>
                 </rect>
@@ -101,7 +101,7 @@ function WeeklyBars({
                   y={y - 4}
                   textAnchor="middle"
                   fontSize={9}
-                  fill="#555"
+                  className="fill-ink"
                   fontWeight={700}
                 >
                   {d.count}
@@ -112,7 +112,7 @@ function WeeklyBars({
                 y={H - 6}
                 textAnchor="middle"
                 fontSize={7.5}
-                fill="#aaa"
+                className="fill-muted"
               >
                 {d.label}
               </text>
@@ -152,13 +152,13 @@ function StatTile({
 }) {
   return (
     <div
-      className="bg-white border border-line-sand rounded-lg px-3 py-2.5 flex-1 min-w-[88px]"
+      className="bg-paper border border-line rounded-lg px-3 py-2.5 flex-1 min-w-[88px]"
       style={{ borderLeft: `3px solid ${accent}` }}
     >
       <div className="text-[22px] font-extrabold text-ink leading-none">
         {value}
       </div>
-      <div className="text-[9px] tracking-[0.08em] text-[#998] mt-1 uppercase">
+      <div className="text-[9px] tracking-[0.08em] text-muted mt-1 uppercase">
         {label}
       </div>
     </div>
@@ -172,7 +172,7 @@ export default function Dashboard({ data }: { data: DashboardData }) {
       <h2 className="text-[15px] font-extrabold text-ink m-0 mb-1">
         Dashboard
       </h2>
-      <p className="text-[11px] text-[#998] m-0 mb-4">
+      <p className="text-[11px] text-muted m-0 mb-4">
         Live counts from the database
         {!data.dbReady && " — database not reachable yet"}
         .
@@ -180,26 +180,26 @@ export default function Dashboard({ data }: { data: DashboardData }) {
 
       {!data.dbReady && (
         <div
-          className="bg-[#fdf8ec] border border-[#eee2c0] rounded-lg px-3.5 py-3 mb-4 text-xs text-[#7a6a3a] leading-relaxed"
+          className="bg-accent-tint border border-line rounded-lg px-3.5 py-3 mb-4 text-xs text-ink leading-relaxed"
           role="status"
         >
           <b>Database not set up yet.</b> Run{" "}
-          <code className="bg-[#f0e8d0] px-1 rounded">supabase/schema.sql</code>{" "}
+          <code className="bg-canvas px-1 rounded">supabase/schema.sql</code>{" "}
           in the Supabase SQL Editor, then{" "}
-          <code className="bg-[#f0e8d0] px-1 rounded">npm run seed</code>. The
+          <code className="bg-canvas px-1 rounded">npm run seed</code>. The
           public site works from bundled data in the meantime — see README.
         </div>
       )}
 
       {/* Status tiles: label + number, color as accent only */}
       <div className="flex gap-2 flex-wrap mb-4">
-        <StatTile label="Pending" value={data.pending} accent="#b8860b" />
-        <StatTile label="Approved" value={data.approved} accent="#3aab7c" />
-        <StatTile label="Rejected" value={data.rejected} accent="#c0397b" />
+        <StatTile label="Pending" value={data.pending} accent="var(--ink)" />
+        <StatTile label="Approved" value={data.approved} accent="var(--accent)" />
+        <StatTile label="Rejected" value={data.rejected} accent="var(--signal)" />
         <StatTile
           label="Families saved"
           value={data.registrationsTotal}
-          accent="#4a7fcf"
+          accent="var(--line-strong)"
         />
       </div>
 
@@ -218,19 +218,15 @@ export default function Dashboard({ data }: { data: DashboardData }) {
 
       {/* Resources by category: magnitude = length (single hue); identity =
           text label + the guide's existing colored chip convention. */}
-      <figure className="bg-white border border-line-sand rounded-lg p-3 m-0">
-        <figcaption className="text-[10px] font-extrabold tracking-[0.08em] text-[#888] mb-2.5">
+      <figure className="bg-paper border border-line rounded-lg p-3 m-0">
+        <figcaption className="text-[10px] font-extrabold tracking-[0.08em] text-muted mb-2.5">
           RESOURCES BY CATEGORY · {data.resourcesTotal} TOTAL
         </figcaption>
         <div className="flex flex-col gap-2">
           {data.resourcesByCategory.map(({ cat, count }) => (
             <div key={cat} className="flex items-center gap-2">
               <span
-                className="text-[8px] tracking-[0.05em] px-1.5 py-0.5 rounded-[3px] border shrink-0 w-[118px] text-center"
-                style={{
-                  color: CAT[cat].color,
-                  borderColor: `${CAT[cat].color}44`,
-                }}
+                className="text-[8px] tracking-[0.05em] px-1.5 py-0.5 rounded-[3px] border border-line text-ink shrink-0 w-[118px] text-center"
               >
                 {CAT[cat].label}
               </span>

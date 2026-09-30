@@ -1,16 +1,16 @@
 import type { CategoryId, ServeType } from "./types";
 
 /**
- * Category colors are text colors, shown on a light tint of themselves.
- * They match the `cat-*` tokens in tailwind.config.ts and all pass WCAG AA.
+ * Categories. Since 2026-09-30 they carry no colour of their own: every
+ * category tag is ink on canvas (src/app/tokens.css), and the label does the work.
  */
-export const CAT: Record<CategoryId, { label: string; color: string; tint: string }> = {
-  education: { label: "Education", color: "#255a94", tint: "#ebf0f5" },
-  health: { label: "Health", color: "#1e6a47", tint: "#ebf2ee" },
-  food: { label: "Food", color: "#8a4710", tint: "#f4eee9" },
-  enrichment: { label: "Enrichment", color: "#673d8c", tint: "#f1eef5" },
-  technology: { label: "Technology", color: "#0f5f6d", tint: "#e9f1f2" },
-  identity: { label: "Identity & advocacy", color: "#9a2b58", tint: "#f6ecf0" },
+export const CAT: Record<CategoryId, { label: string }> = {
+  education: { label: "Education" },
+  health: { label: "Health" },
+  food: { label: "Food" },
+  enrichment: { label: "Enrichment" },
+  technology: { label: "Technology" },
+  identity: { label: "Identity & advocacy" },
 };
 
 export const SERVE_BADGE: Record<ServeType, { label: string }> = {

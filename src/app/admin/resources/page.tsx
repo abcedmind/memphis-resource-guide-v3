@@ -18,9 +18,9 @@ export default async function AdminResourcesPage() {
 
   if (dbGroups.length === 0)
     return (
-      <div className="px-4 py-8 text-center text-[12px] text-[#888] leading-relaxed">
+      <div className="px-4 py-8 text-center text-[12px] text-muted leading-relaxed">
         The database is empty. Run the schema SQL in the Supabase SQL Editor,
-        then <code className="bg-white px-1 rounded">npm run seed</code> to
+        then <code className="bg-paper px-1 rounded">npm run seed</code> to
         load all {SEED_GROUPS.length} groups. See the README.
       </div>
     );

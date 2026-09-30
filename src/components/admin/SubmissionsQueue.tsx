@@ -60,44 +60,44 @@ export default function SubmissionsQueue({
   };
 
   return (
-    <div className="bg-[#fff5fa] px-4 py-3.5 min-h-[50vh]">
-      <div className="text-[10px] font-extrabold tracking-[0.1em] text-cat-identity mb-2">
+    <div className="bg-canvas px-4 py-3.5 min-h-[50vh]">
+      <div className="text-[10px] font-extrabold tracking-[0.1em] text-signal mb-2">
         {pending.length} PENDING SUBMISSION{pending.length !== 1 ? "S" : ""}
       </div>
       {error && (
-        <div className="text-[11px] text-cat-identity mb-2" role="alert">
+        <div className="text-[11px] text-signal mb-2" role="alert">
           {error}
         </div>
       )}
       {pending.length === 0 && (
-        <div className="text-[11px] text-[#b088a0]">No pending submissions.</div>
+        <div className="text-[11px] text-muted">No pending submissions.</div>
       )}
       {pending.map((sub) => (
         <div
           key={sub.id}
-          className="bg-white border border-[#f0c8de] rounded-md p-2.5 mb-1.5"
+          className="bg-paper border border-line rounded-md p-2.5 mb-1.5"
         >
           <div className="text-[13px] font-semibold text-ink">
             {sub.name}{" "}
-            <span className="text-[9px] text-cat-identity">
+            <span className="text-[9px] text-signal">
               [{CAT[sub.category]?.label || sub.category}]
             </span>
           </div>
-          <div className="text-[11px] text-[#666] my-[3px]">{sub.description}</div>
-          <div className="text-[10px] text-[#999] mb-1.5">
+          <div className="text-[11px] text-muted my-[3px]">{sub.description}</div>
+          <div className="text-[10px] text-muted mb-1.5">
             How: {sub.how_to_access} {sub.url ? `· ${sub.url}` : ""} · ages{" "}
             {sub.min_age}–{sub.max_age} · from {sub.submitter_name || "anon"} ·{" "}
             {new Date(sub.created_at).toLocaleDateString()}
           </div>
           <button
             onClick={() => approve(sub)}
-            className="bg-serve-online text-white rounded px-2.5 py-1 text-[10px] mr-1.5"
+            className="bg-accent text-white rounded px-2.5 py-1 text-[10px] mr-1.5"
           >
             APPROVE → ADD
           </button>
           <button
             onClick={() => reject(sub)}
-            className="bg-transparent text-cat-identity border border-[#e0a8c4] rounded px-2.5 py-1 text-[10px]"
+            className="bg-transparent text-signal border border-signal rounded px-2.5 py-1 text-[10px]"
           >
             REJECT
           </button>

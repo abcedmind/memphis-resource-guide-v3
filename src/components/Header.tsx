@@ -18,7 +18,7 @@ export default function Header({ isAdmin = false }: { isAdmin?: boolean }) {
   if (inAdmin || isAdmin) tabs.push(["/admin/resources", t.header.navAdmin]);
 
   return (
-    <header className="bg-white border-t-4 border-primary border-b border-b-line print:hidden">
+    <header className="bg-paper border-t-4 border-primary border-b border-b-line print:hidden">
       <div className="max-w-page mx-auto px-4 pt-5">
         <div className="flex justify-between items-start gap-4">
           <div className="min-w-0">
