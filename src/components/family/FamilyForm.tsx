@@ -86,7 +86,7 @@ export default function FamilyForm({
       <h1 className="text-3xl font-bold leading-tight tracking-[-0.01em] text-ink m-0">
         {t.family.title}
       </h1>
-      <div className="mt-4 mb-8 rounded-md border border-line bg-white px-4 py-3.5 text-base leading-relaxed text-ink">
+      <div className="mt-4 mb-8 rounded-md border border-line bg-paper px-4 py-3.5 text-base leading-relaxed text-ink">
         <p className="m-0">{t.family.introMain}</p>
         <p className="mt-2 mb-0 text-[0.9375rem] text-muted">
           <b className="text-ink">{t.family.introNoEnroll}</b>
@@ -113,7 +113,7 @@ export default function FamilyForm({
       <fieldset className="border-0 p-0 m-0 mt-8">
         <legend className={sectionTitleCls}>{t.family.childrenTitle}</legend>
         {children.map((c, i) => (
-          <div key={i} className="bg-white border border-line rounded-md p-4 mt-3">
+          <div key={i} className="bg-paper border border-line rounded-md p-4 mt-3">
             <p className="text-sm font-semibold text-muted m-0 mb-3">
               {t.plan.child} {i + 1}
             </p>
@@ -168,7 +168,7 @@ export default function FamilyForm({
         <legend className={sectionTitleCls}>{t.family.consentTitle}</legend>
         <label
           className={`mt-3 flex items-start gap-3 cursor-pointer rounded-md p-4 text-[0.9375rem] leading-relaxed text-ink border-2 ${
-            consent ? "bg-success-tint border-success" : "bg-white border-line-strong"
+            consent ? "bg-success-tint border-success" : "bg-paper border-line-strong"
           }`}
         >
           <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 shrink-0" />
@@ -180,7 +180,7 @@ export default function FamilyForm({
         </label>
 
         {/* Optional navigator save */}
-        <label className="mt-3 flex items-start gap-3 cursor-pointer rounded-md p-4 text-[0.9375rem] leading-relaxed text-ink bg-white border border-line">
+        <label className="mt-3 flex items-start gap-3 cursor-pointer rounded-md p-4 text-[0.9375rem] leading-relaxed text-ink bg-paper border border-line">
           <input type="checkbox" checked={optIn} onChange={(e) => setOptIn(e.target.checked)} className="mt-1 shrink-0" />
           <span>
             {t.family.optIn}

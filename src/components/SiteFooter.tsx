@@ -10,7 +10,7 @@ export default function SiteFooter() {
   const inAdmin = pathname.startsWith("/admin");
 
   return (
-    <footer className="bg-white border-t border-line mt-12 print:hidden">
+    <footer className="bg-paper border-t border-line mt-12 print:hidden">
       <div className="max-w-page mx-auto px-4 py-8 text-sm text-muted">
         <p className="m-0 font-semibold text-ink">Memphis Family Resource Guide</p>
         <p className="mt-1 mb-4">{t.browse.footerLine1}</p>

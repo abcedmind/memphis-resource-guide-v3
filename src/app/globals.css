@@ -1,3 +1,5 @@
+@import "./tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,18 +9,19 @@ html {
 }
 
 body {
-  background: #f4f5f7;
-  color: #1b1f24;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--face);
 }
 
 /* One visible focus style everywhere, for keyboard users. */
 :focus-visible {
-  outline: 3px solid #3d7fc0;
+  outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
 
 input[type="checkbox"] {
-  accent-color: #1d5a8e;
+  accent-color: var(--accent);
   width: 1.125rem;
   height: 1.125rem;
 }
@@ -40,7 +43,7 @@ input[type="checkbox"] {
   }
   body,
   main {
-    background: #fff !important;
+    background: var(--paper) !important;
   }
   /* The family plan prints as a clean document: full width, no borders
      that waste ink, page breaks kept out of program entries. */
@@ -51,7 +54,7 @@ input[type="checkbox"] {
     max-width: 100% !important;
   }
   a {
-    color: #1b1f24 !important;
+    color: var(--ink) !important;
   }
   .print\:break-inside-avoid {
     break-inside: avoid;

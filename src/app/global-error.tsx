@@ -10,7 +10,7 @@ export default function GlobalError({
     <html lang="en">
       <body
         style={{
-          background: "#f4f5f7",
+          background: "#f4f4f4",
           color: "#1b1f24",
           fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
           minHeight: "100vh",

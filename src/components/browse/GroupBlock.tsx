@@ -121,7 +121,7 @@ export default function GroupBlock({
               <li key={key}>
                 <ResourceEditor
                   res={res}
-                  color={cat?.color || "#545d68"}
+                  color="var(--accent)"
                   onSave={(p) => {
                     adminApi!.updateResource(g.id, res.id, p);
                     setEditing(null);
@@ -133,7 +133,7 @@ export default function GroupBlock({
           return (
             <li
               key={key}
-              className={`bg-white rounded-md border ${open ? "border-line-strong" : "border-line"}`}
+              className={`bg-paper rounded-md border ${open ? "border-line-strong" : "border-line"}`}
             >
               <button
                 type="button"
@@ -153,10 +153,7 @@ export default function GroupBlock({
                   )}
                   <span className="flex flex-wrap gap-1.5 mt-2.5">
                     {cat && (
-                      <span
-                        className={tag}
-                        style={{ color: cat.color, background: cat.tint }}
-                      >
+                      <span className={`${tag} bg-canvas text-ink`}>
                         {t.cat[res.cat] ?? cat.label}
                       </span>
                     )}
@@ -212,7 +209,7 @@ export default function GroupBlock({
                         className={`rounded px-3 py-1.5 text-sm font-semibold border border-error ${
                           confirmId === res.id
                             ? "bg-error text-white"
-                            : "bg-white text-error"
+                            : "bg-paper text-error"
                         }`}
                       >
                         {confirmId === res.id ? "Tap again to delete" : "Delete"}
@@ -243,7 +240,7 @@ export default function GroupBlock({
                 flags: [],
                 serve: "navigator",
               }}
-              color="#1e6a47"
+              color="var(--accent)"
               onSave={(p) => {
                 adminApi!.addResource(g.id, {
                   name: p.name ?? "",
@@ -265,7 +262,7 @@ export default function GroupBlock({
           <button
             type="button"
             onClick={() => setEditing("new")}
-            className="w-full mt-2 bg-white border border-dashed border-line-strong rounded-md py-2.5 text-sm text-muted"
+            className="w-full mt-2 bg-paper border border-dashed border-line-strong rounded-md py-2.5 text-sm text-muted"
           >
             + Add resource to {g.label}
           </button>
