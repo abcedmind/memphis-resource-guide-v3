@@ -1,0 +1,25 @@
+# Auto-merge for pull requests that Copilot, a session or the owner opened.
+# Z, 2026-10-05: "i told you automerge, and that none of this shit in the repo needs my merge because i didnt make any of it".
+# Undo: delete this file, and run `gh repo edit abcedmind/<repo> --enable-auto-merge=false`.
+# Draft pull requests are skipped on purpose: an unfinished Copilot draft never merges until someone marks it ready.
+# With no required checks on the branch, auto-merge merges at once; with required checks it waits for them.
+name: automerge
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: github.event.pull_request.draft == false && (github.event.pull_request.user.login == 'Copilot' || github.event.pull_request.user.login == 'github-actions[bot]' || github.event.pull_request.user.login == 'abcedmind')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Turn on auto-merge (squash)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto --squash "$PR_URL"
