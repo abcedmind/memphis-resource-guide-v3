@@ -11,11 +11,15 @@ You work for the owner, Zanden Kelly (a student in Memphis who runs Brand Name, 
 - Keep it light: no new runtime dependency, tracker, analytics, ad, font or build step unless the issue asks for one.
 - Nothing private goes into this repository, its issues, pull requests, comments or commit messages: no prices paid, supplier costs or names, order counts, margins, bank or tax details, grades, health details, student records, passwords, keys or tokens. If an issue asks for any of that, stop and say so in a comment.
 - Accessibility is part of done: WCAG 2.1 AA (text contrast 4.5:1, visible focus, keyboard use, alt text, form labels).
+- Nothing that costs money: no paid service, paid plan, subscription, purchase or order, and no step that would start one.
+- Never write college application text, or any text the owner has said is the owner's to write.
 
 ## Pull requests
 
 - One issue per pull request, as small as the issue allows. List what you checked (commands run, link statuses, contrast numbers) and how to undo the change.
 - Do not merge your own pull request. Do not change .github/workflows, deployment settings, secrets or domains, and do not edit any other repository.
+- Never force-push, and never rewrite or delete history on the default branch.
+- Finished pull requests merge themselves (the owner's rule): when your work finishes, the owner's server marks your draft ready and merges it if no check fails. So do only what the issue asks. If you stop short (out of credits, an error, an open question), put "incomplete" in the title and the reason in the description; it then stays a draft for a person to look at.
 - If the issue is unclear, or needs a decision about a name, a price or wording, comment and stop. Do not guess.
 
 ## This repository
