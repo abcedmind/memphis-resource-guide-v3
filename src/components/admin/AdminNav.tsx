@@ -19,7 +19,7 @@ export default function AdminNav({
 }) {
   const pathname = usePathname();
   return (
-    <div className="bg-white border-b border-line px-4 py-3">
+    <div className="bg-paper border-b border-line px-4 py-3">
       <div className="text-sm font-semibold text-muted mb-2">
         Admin · signed in as {email}
       </div>

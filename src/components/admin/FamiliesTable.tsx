@@ -74,39 +74,39 @@ export default function FamiliesTable({
   };
 
   return (
-    <div className="bg-[#fff5fa] px-4 py-3.5 min-h-[50vh]">
-      <div className="text-[10px] font-extrabold tracking-[0.1em] text-cat-identity mb-2">
+    <div className="bg-canvas px-4 py-3.5 min-h-[50vh]">
+      <div className="text-[10px] font-extrabold tracking-[0.1em] text-signal mb-2">
         {regs.length} SAVED FAMILY REGISTRATION{regs.length !== 1 ? "S" : ""} ·
         OPTED-IN ONLY
       </div>
-      <p className="text-[10px] text-[#b088a0] mb-2.5 leading-normal">
+      <p className="text-[10px] text-muted mb-2.5 leading-normal">
         Families appear here only if they explicitly checked the navigator
         follow-up box. Handle with care — contact them to help, then delete.
       </p>
       {regs.length > 0 && (
         <div className="mb-3 flex gap-1.5">
-          <button onClick={exportCsv} className="bg-cat-education text-white rounded px-2.5 py-1 text-[10px]">
+          <button onClick={exportCsv} className="bg-accent text-white rounded px-2.5 py-1 text-[10px]">
             Export CSV
           </button>
-          <button onClick={exportJson} className="bg-cat-education text-white rounded px-2.5 py-1 text-[10px]">
+          <button onClick={exportJson} className="bg-accent text-white rounded px-2.5 py-1 text-[10px]">
             Export JSON
           </button>
         </div>
       )}
       {error && (
-        <div className="text-[11px] text-cat-identity mb-2" role="alert">
+        <div className="text-[11px] text-signal mb-2" role="alert">
           {error}
         </div>
       )}
       {regs.length === 0 && (
-        <div className="text-[11px] text-[#b088a0]">
+        <div className="text-[11px] text-muted">
           No saved registrations.
         </div>
       )}
       {regs.map((r) => (
         <div
           key={r.id}
-          className="bg-white border border-[#f0c8de] rounded-md p-2 my-1.5 text-[11px] text-[#555]"
+          className="bg-paper border border-line rounded-md p-2 my-1.5 text-[11px] text-ink"
         >
           <b>{r.parent_name || "—"}</b> · {r.contact || "no contact"} ·{" "}
           {r.zip || "no zip"}
@@ -126,17 +126,17 @@ export default function FamiliesTable({
             </>
           )}
           <br />
-          <span className="text-[#999]">
+          <span className="text-muted">
             {new Date(r.created_at).toLocaleString()}
           </span>
           <button
             onClick={() =>
               confirmId === r.id ? remove(r.id) : setConfirmId(r.id)
             }
-            className={`ml-2 border border-[#e0a8c4] rounded-[3px] text-[9px] px-1.5 py-0.5 ${
+            className={`ml-2 border border-signal rounded-[3px] text-[9px] px-1.5 py-0.5 ${
               confirmId === r.id
-                ? "bg-cat-identity text-white"
-                : "bg-transparent text-cat-identity"
+                ? "bg-signal text-white"
+                : "bg-transparent text-signal"
             }`}
           >
             {confirmId === r.id ? "confirm" : "delete"}
