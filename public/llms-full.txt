@@ -1,0 +1,481 @@
+# Memphis Family Resource Guide (full text)
+
+> Free programs for children and families in Shelby County, Tennessee, ages 0 to 18, sorted by age group and need. A parent enters a child's age and a few facts, and the guide shows the programs that child qualifies for, with how to sign up. It is a list, not an enrollment service: nothing is submitted for anyone.
+
+This file is a plain-text copy of the guide's 46 programs and its About page, made 2026-10-06 from the bundled data the site itself falls back to (`src/lib/seed-data.ts`). The live pages at https://memphis-resource-guide.vercel.app/ are the authority: programs change their hours, ages and rules, so open a program's link or call before relying on it. English only; the Spanish setting changes the interface, not the program text. To suggest an addition or a correction, use the form at https://memphis-resource-guide.vercel.app/suggest. The site's data is read-only for agents unless a page says otherwise.
+
+## About this guide
+
+Programs gathered June 2026. Page reviewed 2026-09-28.
+
+### What it is
+
+A list of free programs for children and families in Shelby County, Tennessee, ages 0 to 18, sorted by age group and need. A parent enters a child's age and a few facts; the guide shows the programs that child qualifies for, with how to sign up. Nothing is submitted for you.
+
+### Who makes it
+
+A student at Rhodes College in Memphis built it and keeps it. It is a one-person project. It is not funded by, run by, or affiliated with any of the organizations listed in it, unless a page here says otherwise.
+
+### How the list is checked
+
+Every program was found on the provider's own website or a public listing, and its page is linked on the card. The list was gathered in June 2026 and is checked when someone reports a change, not on a fixed schedule. Programs change their hours, ages and rules without telling anyone. Before relying on a program, open its link or call.
+
+### How to add or correct a program
+
+Anyone can propose a program or a correction. It is read by a person before it appears here. Use the form at https://memphis-resource-guide.vercel.app/suggest.
+
+### Where the information comes from
+
+Providers' own websites, the Memphis Public Library's public pages, 211 Tennessee, Shelby County and City of Memphis public pages, and school and non-profit listings. Nothing here is copied from a paid database.
+
+### Privacy
+
+Browsing the guide stores nothing about you. The family plan runs in your browser and is not saved unless you tick the box asking a navigator to follow up. No Social Security numbers, income records or medical information are ever asked for. Location is used only if you turn on Near me, and only to sort by distance.
+
+### What this guide does not do
+
+It does not enroll anyone, does not decide eligibility for any program, does not replace 2-1-1, and does not speak for any provider. A card in this guide means a program said it exists and is free; it does not mean there is space, or that your child will be accepted.
+
+## Programs
+
+### ALL AGES (7 programs)
+
+#### Memphis Public Library
+
+- Category: Education
+- Ages: 0 and up
+- Access: Self-serve online
+- What it is: Free library card for all Shelby County residents. 18 locations, 1.7M items, 70K+ ebooks, 3,824 programs/yr, 646 free internet terminals.
+- How to sign up: Apply online (13+) or in person with ID. memphislibrary.org
+- Link: https://www.memphislibrary.org/start-here/
+
+#### 901 Pass
+
+- Category: Enrichment
+- Ages: 0 and up
+- Access: In person
+- What it is: Free city pass: all community centers, aquatics & senior centers, plus free Memphis Zoo every Tuesday. Can double as a library card.
+- How to sign up: Pick up at any library or city community center.
+- Link: https://www.memphislibrary.org/901-pass-library-card/
+
+#### 211 Tennessee (LINC 2-1-1)
+
+- Category: Health
+- Ages: 0 and up
+- Access: Self-serve online
+- What it is: Free 24/7 helpline routing families to every available service in Shelby County: food, housing, healthcare, childcare, utilities.
+- How to sign up: Dial 2-1-1, anytime. Also linc.net.
+- Link: https://linc.net
+
+#### TennCare / CHIP
+
+- Category: Health
+- Ages: 0–18
+- Access: Self-serve online
+- What it is: Tennessee Medicaid: free/low-cost health & dental for qualifying children and families. Doctor visits, prescriptions, mental health.
+- How to sign up: benefits.tn.gov or 1-855-259-0701.
+- Link: https://www.tn.gov/tenncare
+
+#### Mid-South Food Bank
+
+- Category: Food
+- Ages: 0 and up
+- Access: In person
+- What it is: Food assistance through partner pantries (many at MSCS schools) and mobile distribution sites across Shelby County.
+- How to sign up: Find nearest pantry at midsouthfoodbank.org or dial 2-1-1.
+- Link: https://midsouthfoodbank.org
+
+#### SNAP (Food Stamps)
+
+- Category: Food
+- Ages: 0 and up
+- Access: Self-serve online
+- What it is: Federal food-purchase assistance. 150K+ Shelby County residents benefit; ~40% of recipients are children.
+- How to sign up: Apply at benefits.tn.gov or your local DHS office.
+- Link: https://www.tn.gov/humanservices/for-families/supplemental-nutrition-assistance-program-snap.html
+
+#### ProGeny Place — Connected & Empowered Digital Literacy
+
+- Category: Technology
+- Ages: 0 and up
+- Access: Navigator helps
+- What it is: Free monthly hands-on digital-literacy workshops for all ages (with M Street Fiber & Ting): 6 modules from basic device use and online safety to email, resume-building, and career paths in e-commerce, remote work, and content creation. Complete the series and receive a computer to keep. [Verify program details locally.]
+- How to sign up: RSVP at progenyplace.org/events. Email info@progenyplace.org · 901-701-6036.
+- Link: https://www.progenyplace.org/events-1/connected-empowered-digital-literacy
+
+### BIRTH – AGE 2 (5 programs)
+
+#### Books from Birth / Imagination Library
+
+- Category: Education
+- Ages: 0–5
+- Access: Self-serve online
+- What it is: Shelby County affiliate of Dolly Parton's Imagination Library (run by Porter-Leath). One free age-appropriate book mailed to your child each month, birth–age 5, in your child's name. No income requirement.
+- How to sign up: Register at imaginationlibrary.com — select Shelby County.
+- Link: https://imaginationlibrary.com/usa/find-my-program/
+
+#### WIC — Women, Infants & Children
+
+- Category: Health
+- Ages: 0–5
+- Access: In person
+- What it is: Free food, formula, produce + nutrition counseling and healthcare referrals for pregnant women, new mothers, infants, and children under 5. Generous income guidelines.
+- How to sign up: Shelby County Health Dept: 901-222-9100.
+- Link: https://www.shelbytnhealth.com/243/WIC
+
+#### Le Bonheur Parent Support Warm Line
+
+- Category: Health
+- Ages: 0–18
+- Access: Self-serve online
+- What it is: Free phone line staffed by Le Bonheur professionals: parenting questions, child-development concerns, resource connections. Not a crisis line.
+- How to sign up: Call 844-877-9276, Mon–Fri 11am–8pm.
+- Link: https://lebonheur.org
+
+#### Early Head Start (Porter-Leath)
+
+- Category: Education
+- Ages: 0–3
+- Access: Navigator helps
+- What it is: Federally-funded comprehensive services for income-eligible families: early education, health screenings, nutrition, parent support, birth–age 3.
+- How to sign up: porterleath.org or 901-320-0591.
+- Link: https://www.porterleath.org
+
+#### Urban Child Institute
+
+- Category: Education
+- Ages: 0–3
+- Access: Self-serve online
+- What it is: Memphis nonprofit with research, guides, and resource connections for parents of children under 3 — the most critical developmental window.
+- How to sign up: Free resources at urbanchildinstitute.org.
+- Link: https://www.urbanchildinstitute.org
+
+### AGES 3–5 (4 programs)
+
+#### First 8 Memphis / Pre-K for All
+
+- Category: Education
+- Ages: 3–4
+- Access: In person
+- What it is: 2025 ordinance: free Pre-K for ALL 3–4 year-olds in Shelby County, regardless of income. 97+ classrooms, with wraparound health, nutrition & family support.
+- How to sign up: Apply at first8memphis.org or scsk12.org/prek.
+- Link: https://www.first8memphis.org/pre-k-registration
+
+#### MSCS Early Childhood Program
+
+- Category: Education
+- Ages: 3–4
+- Access: In person
+- What it is: Memphis-Shelby County Schools Pre-K at select elementaries and Early Learning Centers. 3,340+ students/yr; strong kindergarten-readiness outcomes.
+- How to sign up: scsk12.org/prek. Child must turn 3 or 4 by Aug 15.
+- Link: https://www.scsk12.org/prek/
+
+#### Library DiscoverREAD
+
+- Category: Education
+- Ages: 0–5
+- Access: Navigator helps
+- What it is: Early-literacy programming at all branches: story times, STEAM activities, school-readiness events. Free, mostly walk-in.
+- How to sign up: memphislibrary.org/events → filter Children's.
+- Link: https://memphislibrary.org
+
+#### Head Start (Porter-Leath)
+
+- Category: Education
+- Ages: 3–4
+- Access: Navigator helps
+- What it is: Federal full-day program for income-eligible 3–4 year-olds: education, health, dental, nutrition, family services — most comprehensive early-childhood option.
+- How to sign up: porterleath.org. Income guidelines apply.
+- Link: https://www.porterleath.org
+
+### AGES 6–11 (6 programs)
+
+#### Library Summer Reading
+
+- Category: Education
+- Ages: 5–18
+- Access: In person
+- What it is: Free annual summer reading program across all 18 branches. Reduces summer learning loss, especially for low-income students.
+- How to sign up: Sign up at any branch each summer.
+- Link: https://memphislibrary.org
+
+#### Memphis Zoo — Free Tuesdays
+
+- Category: Enrichment
+- Ages: 0 and up
+- Access: In person
+- What it is: Free every Tuesday for residents with a 901 Pass. One of the best recurring free family outings in the city.
+- How to sign up: Get a 901 Pass, bring it Tuesdays.
+- Link: https://memphiszoo.org
+
+#### Boys & Girls Club of Greater Memphis
+
+- Category: Enrichment
+- Ages: 6–18
+- Access: Navigator helps
+- What it is: After-school and summer programs: academic support, sports, arts, character development. Multiple locations; consistent attendance improves outcomes.
+- How to sign up: Enroll at bgcmemphis.org.
+- Link: https://www.bgcmemphis.org
+
+#### YMCA of Memphis & the Mid-South
+
+- Category: Enrichment
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: After-school care, summer camp, swim lessons, sports leagues. Financial assistance available — no one is turned away for inability to pay.
+- How to sign up: ymcamemphis.org or any Y branch.
+- Link: https://ymcamemphis.org
+
+#### Big Brothers Big Sisters of the Mid-South
+
+- Category: Enrichment
+- Ages: 6–17
+- Access: Navigator helps
+- What it is: Free one-on-one mentorship matching kids 6–17 with vetted adult volunteers. School- and community-based matches.
+- How to sign up: Apply at bbbsmidsouth.org.
+- Link: https://www.bbbsmidsouth.org
+
+#### MSCS School Food Pantries
+
+- Category: Food
+- Ages: 4–18
+- Access: In person
+- What it is: Many Memphis-Shelby County schools run weekly/monthly food pantries; some partner with Mid-South Food Bank for mobile distribution.
+- How to sign up: Contact your school's Family Engagement staff. No documentation needed.
+- Link: https://www.scsk12.org
+
+### AGES 12–16 (5 programs)
+
+#### CLOUD901 Teen Learning Lab
+
+- Category: Technology
+- Ages: 12–18
+- Access: In person
+- What it is: State-of-the-art teen tech & creativity space at the Central Library (3030 Poplar). Design, media, learning programs for teens.
+- How to sign up: Drop in at Central Library. Free.
+- Link: https://memphislibrary.org
+
+#### Library Teen Innovation Centers
+
+- Category: Technology
+- Ages: 12–18
+- Access: In person
+- What it is: 3D printing, digital media, coding, and music production at select branches. Free with a library card.
+- How to sign up: Check memphislibrary.org/events for locations.
+- Link: https://memphislibrary.org
+
+#### Udemy via Memphis Library (Free)
+
+- Category: Technology
+- Ages: 13 and up
+- Access: Self-serve online
+- What it is: Free access to thousands of Udemy professional courses through the library's Gale Presents program — business, tech, design, languages.
+- How to sign up: Get a library card → memphislibrary.org → Learn → Computers → Udemy.
+- Link: https://www.memphislibrary.org/learn/computers/
+
+#### JobLINC at Central Library
+
+- Category: Technology
+- Ages: 14 and up
+- Access: In person
+- What it is: Free career coaching, resume review, mock interviews, digital job-seeking skills. Free computers and printers.
+- How to sign up: Walk in at Central Library, 3030 Poplar.
+- Link: https://memphislibrary.org
+
+#### SW Tennessee CC — Free Digital Literacy
+
+- Category: Technology
+- Ages: 16 and up
+- Access: Navigator helps
+- What it is: Free non-credit digital-literacy & Microsoft Office courses via TN Board of Regents. Info sessions in Jan & Aug.
+- How to sign up: southwest.tn.edu for session dates.
+- Link: https://www.southwest.tn.edu
+
+### AGES 17–18 (4 programs)
+
+#### Tennessee Promise
+
+- Category: Education
+- Ages: 17–18
+- Access: Self-serve online
+- What it is: EVERY TN public-school senior is eligible for two years of tuition-free community or technical college. Last-dollar scholarship, no income limit.
+- How to sign up: Apply at tnpromise.gov in fall of senior year. Deadline Nov 1.
+- Link: https://tnpromise.gov
+
+#### FAFSA — Federal Student Aid
+
+- Category: Education
+- Ages: 16–18
+- Access: Self-serve online
+- What it is: Unlocks Pell Grants (up to ~$7K/yr free), subsidized loans, work-study. Free to file. Opens Oct 1. Never pay anyone to complete it.
+- How to sign up: studentaid.gov. Needs parent tax info for dependents.
+- Link: https://studentaid.gov
+
+#### TN Student Assistance Award (TSAA)
+
+- Category: Education
+- Ages: 17–18
+- Access: Self-serve online
+- What it is: State need-based grant; stacks on top of Tennessee Promise for extra support.
+- How to sign up: File FAFSA first; see tn.gov/collegepays.
+- Link: https://www.collegefortn.org/tennessee-financial-aid/tennessee-student-assistance-award/
+
+#### Southwest Tennessee Community College
+
+- Category: Education
+- Ages: 16 and up
+- Access: Self-serve online
+- What it is: Primary TN Promise destination in Memphis: certificates, associate degrees, transfer pathways, dual enrollment for current high-schoolers.
+- How to sign up: Apply at southwest.tn.edu.
+- Link: https://www.southwest.tn.edu
+
+### NEURODIVERGENT & DISABILITY (8 programs)
+
+Supports for children who are autistic, neurodivergent, or have developmental, learning, or physical disabilities. Newest section — verify details locally.
+
+#### Tennessee Early Intervention System (TEIS)
+
+- Category: Health
+- Ages: 0–3
+- Access: Navigator helps
+- What it is: Free voluntary program for children birth–3 with disabilities or developmental delay. Free evaluation and services for motor, communication, cognitive, social, and adaptive delays.
+- How to sign up: 1-800-852-7157 (West TN).
+- Link: https://www.tn.gov/disability-and-aging/disability-aging-programs/teis.html
+
+#### Le Bonheur LEAD (Early Intervention & Development)
+
+- Category: Health
+- Ages: 0–3
+- Access: Navigator helps
+- What it is: Birth–3 early intervention: PT, OT, speech-language, feeding/swallowing, audiology — in homes and child-care centers. Partners with TEIS.
+- How to sign up: 901-287-4900.
+- Link: https://www.lebonheur.org/services/services-for-children-with-special-needs
+
+#### The Arc Mid-South
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Advocacy, community outreach, and family support for people with intellectual and developmental disabilities.
+- How to sign up: 901-327-2473, thearcmidsouth.org.
+- Link: https://www.thearcmidsouth.org
+
+#### Autism Resources of the Mid-South (ARMS)
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Support, advocacy, and education for everyone affected by autism in the Mid-South.
+- How to sign up: 901-509-3027, autismresourcesmidsouth.org.
+- Link: https://autismresourcesmidsouth.org/
+
+#### Support & Training for Exceptional Parents (STEP)
+
+- Category: Education
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Tennessee's parent-training & information center. Free help understanding special-education rights and building your child's IEP.
+- How to sign up: 1-800-280-7837, tnstep.info.
+- Link: https://tnstep.info/
+
+#### Boling Center for Developmental Disabilities (UTHSC)
+
+- Category: Health
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: University center supporting children & families through evaluation, services, training, and research on developmental disabilities.
+- How to sign up: 901-448-6511.
+- Link: https://uthsc.edu/cdd/
+
+#### Katie Beckett Program (TennCare)
+
+- Category: Health
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: For children under 18 with disabilities or complex medical needs who don't qualify for Medicaid due to parental income/assets.
+- How to sign up: tn.gov/tenncare → Katie Beckett.
+- Link: https://www.tn.gov/tenncare/long-term-services-supports/katie-beckett-waiver.html
+
+#### Tennessee Disability Pathfinder
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Self-serve online
+- What it is: Statewide free directory + multilingual helpline connecting families to disability services of every kind.
+- How to sign up: 1-800-640-4636, tnpathfinder.org.
+- Link: https://www.tnpathfinder.org
+
+### LGBTQ+ YOUTH (2 programs)
+
+Affirming community, support, and family services. Newest section — verify details locally.
+
+#### OUTMemphis — PRYSM Youth Program
+
+- Category: Identity & advocacy
+- Ages: 12–17
+- Access: Navigator helps
+- What it is: Proud, Resilient, Youth-Standing-Memphis: a supportive program for LGBTQ+ youth 12–17 building community, celebrating identity, and providing tools to thrive.
+- How to sign up: Youth Empowerment Center, 2055 Southern Ave. outmemphis.org/prysm.
+- Link: https://www.outmemphis.org/prysm
+
+#### OUTMemphis — Family Care Navigation
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Support for caregivers navigating their child's LGBTQ+ identity, plus care navigation for trans and gender-nonconforming youth and the whole family.
+- How to sign up: outmemphis.org/services.
+- Link: https://www.outmemphis.org/services
+
+### IMMIGRANT, REFUGEE & CULTURAL COMMUNITIES (4 programs)
+
+Help with school enrollment, benefits, legal questions, and belonging for immigrant, refugee, and multilingual families. Verify details locally.
+
+#### Latino Memphis
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Connects Latino families to education, health, and legal services. Navigators help with school enrollment, benefits, and immigration questions.
+- How to sign up: latinomemphis.org.
+- Link: https://www.latinomemphis.org
+
+#### Refugee Empowerment Program
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Supports refugee and immigrant families through education, employment, and belonging programs as families rebuild new lives.
+- How to sign up: Search 'Refugee Empowerment Program Memphis'.
+- Link: https://www.refugeeempowerment.com
+
+#### Advocates for Immigrant Rights (AIR)
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Defends immigrants' rights and dignity through legal representation and advocacy, especially for those most at risk.
+- How to sign up: Search 'Advocates for Immigrant Rights Memphis'.
+- Link: https://www.airtn.org
+
+#### Vietnamese American Community of West TN
+
+- Category: Identity & advocacy
+- Ages: 0–18
+- Access: Navigator helps
+- What it is: Preserves Vietnamese heritage in West Tennessee — culture, family support, and helping youth carry traditions forward.
+- How to sign up: Search 'Vietnamese American Community West Tennessee'.
+- Link: 
+
+### STEM & DIGITAL EQUITY (1 programs)
+
+Free tech, coding, and digital-skills programs widening access for underrepresented Memphis youth. Verify details locally.
+
+#### CodeCrew
+
+- Category: Technology
+- Ages: 8–18
+- Access: Navigator helps
+- What it is: Free coding education and mentorship for Memphis youth: after-school, summer camps, and the CodeSchool of Memphis. Focus on students underrepresented in tech.
+- How to sign up: codecrew.org.
+- Link: https://www.codecrew.org

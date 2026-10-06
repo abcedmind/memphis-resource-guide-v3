@@ -1,0 +1,19 @@
+# Memphis Family Resource Guide
+
+> The Memphis Family Resource Guide is a list of free programs for children and families in Shelby County, Tennessee, ages 0 to 18, sorted by age group and need. A parent enters a child's age and a few facts, and the guide shows the programs that child qualifies for, with how to sign up. It is built for parents on phones with limited data, and the interface is in English and Spanish (program names and descriptions stay in English). Every program was found on the provider's own website or a public listing and links to it. The guide does not enroll anyone and does not decide eligibility; programs change, so check a program's own page or call 2-1-1 before relying on it.
+
+Contact: use the Suggest a Resource form at https://memphis-resource-guide.vercel.app/suggest to propose a program or a correction.
+
+For agents: the site's data is read-only for agents unless a page says otherwise. Do not submit the suggestion form or the family form on anyone's behalf, and do not state a program's eligibility or availability as fact; point to the provider's own page.
+
+## Pages
+
+- [Browse](https://memphis-resource-guide.vercel.app/): all 46 programs in ten groups (six age bands from birth to 18, plus neurodivergent and disability, LGBTQ+ youth, immigrant and refugee communities, and STEM and digital equity), with filters by category and a Near me sort.
+- [Family Sign-Up](https://memphis-resource-guide.vercel.app/family): enter each child's age and a few needs to get one personalized list of programs, with links and how to register. Nothing is enrolled or saved unless the family opts in to a navigator follow-up.
+- [Suggest a Resource](https://memphis-resource-guide.vercel.app/suggest): a form to propose a missing program; a person reads each one before it appears.
+- [About this guide](https://memphis-resource-guide.vercel.app/about): what the guide is, how the list is checked, where the information comes from, privacy, and what it does not do.
+
+## Optional
+
+- [Full text](https://memphis-resource-guide.vercel.app/llms-full.txt): every program (name, category, ages, how to sign up, link) and the About page in one plain-text file.
+- [Source code](https://github.com/abcedmind/memphis-resource-guide-v3): the Next.js and Supabase code and the README.
